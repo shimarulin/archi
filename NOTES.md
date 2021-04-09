@@ -3,6 +3,21 @@
 - Lint - https://github.com/rust-lang/rust-clippy
 - Format code - https://github.com/rust-lang/rustfmt
 
+Manage dependencies
+
+- https://github.com/killercup/cargo-edit
+    -  Could not find directory of OpenSSL installation, and this `-sys` crate cannot
+        proceed without this knowledge. If OpenSSL is installed and this crate had
+        trouble finding it,  you can set the `OPENSSL_DIR` environment variable for the
+        compilation process.
+           
+        Make sure you also have the development packages of openssl installed.
+        For example, `libssl-dev` on Ubuntu or `openssl-devel` on Fedora.
+        
+        If you're in a situation where you think the directory *should* be found
+        automatically, please open a bug at https://github.com/sfackler/rust-openssl
+        and include information about your system as well as this message.
+
 ### Pre-commit
 
 - https://github.com/rhysd/cargo-husky

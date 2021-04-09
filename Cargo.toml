@@ -13,3 +13,4 @@ lto = true
 panic = 'abort'
 
 [dependencies]
+dialoguer = "0.8.0"

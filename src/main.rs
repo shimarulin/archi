@@ -1,3 +1,6 @@
+mod setup;
+
 fn main() {
-    println!("Hello, world! Save your time!");
+    println!("Hello, world!");
+    setup::setup()
 }
