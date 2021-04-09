@@ -1,6 +1,8 @@
 mod setup;
 
 fn main() {
-    println!("Hello, world!");
-    setup::setup()
+    let config = setup::setup();
+
+    println!("username is {}", config.answers.user.username);
+    println!("password is {}", config.answers.user.password);
 }
