@@ -5,8 +5,7 @@ mod questions;
 // }
 
 pub fn setup() {
-    println!("Hello, setup!");
-    let answers = questions::questions();
+    let answers = questions::ask_questions();
 
     println!("!Hello {}!", answers.user.username);
     println!("!Password: {}", answers.user.password);

@@ -4,7 +4,7 @@ pub struct Answers {
     pub user: user::User,
 }
 
-pub fn questions() -> Answers {
+pub fn ask_questions() -> Answers {
     Answers {
         user: user::setup_user()
     }
