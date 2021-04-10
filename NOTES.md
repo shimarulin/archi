@@ -1,3 +1,11 @@
+### available shell commands and CLI tools
+
+#### Disk
+
+- parted
+- fdisk
+- lsblk (get info about disks)
+
 ### Tools
 
 - Lint - https://github.com/rust-lang/rust-clippy

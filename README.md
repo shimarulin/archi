@@ -4,6 +4,18 @@
 
 ## Development
 
+### Development dependencies
+
+To extend Cargo functionality I'm use https://github.com/killercup/cargo-edit. To compile it, you need to install the openssl development package.
+
+For example, `libssl-dev` on Ubuntu:
+
+```shell
+sudo apt install libssl-dev && cargo install cargo-edit
+```
+
+or `openssl-devel` on Fedora.
+
 ### Build
 
 #### Optimizing the size of the executable file
