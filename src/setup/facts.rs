@@ -1,6 +1,7 @@
 mod firmware_interface;
-mod disks;
+pub(crate) mod disks;
 
+// #[derive(Clone)]
 pub struct Facts {
     pub firmware: String,
     pub disks: Vec<disks::BlockDevice>

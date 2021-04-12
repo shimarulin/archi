@@ -7,10 +7,11 @@ pub struct Config {
 }
 
 pub fn setup() -> Config {
-    let facts = facts::gathering_facts();
+    let facts_ = facts::gathering_facts();
+    let answers_ = questions::ask_questions(&facts_);
 
     Config {
-        facts,
-        answers: questions::ask_questions(),
+        facts: facts_,
+        answers: answers_,
     }
 }
