@@ -1,6 +1,6 @@
-use std::process::{Command};
 use serde::{Deserialize, Serialize};
 use serde_json;
+use std::process::Command;
 
 #[derive(Serialize, Deserialize)]
 pub struct BlockDevice {

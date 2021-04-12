@@ -1,10 +1,10 @@
-mod firmware_interface;
 pub(crate) mod disks;
+mod firmware_interface;
 
 // #[derive(Clone)]
 pub struct Facts {
     pub firmware: String,
-    pub disks: Vec<disks::BlockDevice>
+    pub disks: Vec<disks::BlockDevice>,
 }
 
 pub fn gathering_facts() -> Facts {

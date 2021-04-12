@@ -4,7 +4,7 @@ mod questions_theme;
 
 pub struct Config {
     pub facts: facts::Facts,
-    pub answers: questions::Answers
+    pub answers: questions::Answers,
 }
 
 pub fn setup() -> Config {

@@ -1,5 +1,5 @@
-use dialoguer::{Input, Password};
 use crate::setup::questions_theme::get_questions_theme;
+use dialoguer::{Input, Password};
 
 pub struct User {
     pub username: String,
