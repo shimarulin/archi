@@ -36,3 +36,20 @@ Shell command:
 ```shell
 cargo build --release && strip target/release/archi
 ```
+
+### How to test on Virtualbox
+
+#### Setup SSH connection
+
+1. Setup VM Network. Select Bridged Adapter
+2. Run VM:
+    2.1. Setup password: `passwd`
+    2.2. Run SSH service: `systemctl start sshd`
+    2.2. Show IP: `ip addr show` (192.168.43.91, for example)
+3. Connect from host: `ssh -o 'IdentitiesOnly=yes' root@192.168.43.91`
+
+#### Send file from host to guest via SSH
+
+```shell
+scp -o 'IdentitiesOnly=yes' ./archi root@192.168.43.91:/root/
+```
