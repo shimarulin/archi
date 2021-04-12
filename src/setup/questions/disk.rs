@@ -5,6 +5,7 @@ use crate::setup::questions_theme::get_questions_theme;
 
 pub fn select_disk(block_device_list: &Vec<disks::BlockDevice>) -> String {
     let theme = ColorfulTheme {
+        prompt_suffix: style("═════════════════════════════════════════════════════════════════════════════".to_string()).for_stderr().black().bright(),
         success_suffix: style("".to_string()).for_stderr().black().bright(),
         ..get_questions_theme()
     };
@@ -12,7 +13,7 @@ pub fn select_disk(block_device_list: &Vec<disks::BlockDevice>) -> String {
         .iter()
         .map(|block_device| {
             format!(
-                "{name:<9} {model:<20} {size:<8} {serial:<18}",
+                "{name:<9} {model:<24} {size:<8} {serial:<32}",
                 name = block_device.name.to_string(),
                 model = block_device.model.to_string(),
                 size = block_device.size.to_string(),
@@ -22,7 +23,7 @@ pub fn select_disk(block_device_list: &Vec<disks::BlockDevice>) -> String {
         .collect::<Vec<_>>();
 
     let prompt_table_header = style(format!(
-                "{name:<9} {model:<20} {size:<8} {serial:<18}",
+                "{name:<9} {model:<24} {size:<8} {serial:<32}",
                 name = "Name",
                 model = "Model",
                 size = "Size",
