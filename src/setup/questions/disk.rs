@@ -1,11 +1,12 @@
 use crate::setup::facts::disks;
 use dialoguer::{theme::ColorfulTheme, Select};
 use dialoguer::console::style;
+use crate::setup::questions_theme::get_questions_theme;
 
 pub fn select_disk(block_device_list: &Vec<disks::BlockDevice>) -> String {
     let theme = ColorfulTheme {
         success_suffix: style("".to_string()).for_stderr().black().bright(),
-        ..ColorfulTheme::default()
+        ..get_questions_theme()
     };
     let selections = block_device_list
         .iter()
