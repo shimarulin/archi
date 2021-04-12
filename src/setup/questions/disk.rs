@@ -2,7 +2,7 @@ use crate::setup::facts::disks;
 use dialoguer::{theme::ColorfulTheme, Select};
 use dialoguer::console::style;
 
-pub fn select_disk(block_device_list: &Vec<disks::BlockDevice>) {
+pub fn select_disk(block_device_list: &Vec<disks::BlockDevice>) -> String {
     let theme = ColorfulTheme {
         success_suffix: style("".to_string()).for_stderr().black().bright(),
         ..ColorfulTheme::default()
@@ -40,5 +40,5 @@ pub fn select_disk(block_device_list: &Vec<disks::BlockDevice>) {
         .interact()
         .unwrap();
 
-    println!("Enjoy your {:?}!", selection);
+    (&block_device_list[selection].path).to_string()
 }
