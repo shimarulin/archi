@@ -3,7 +3,7 @@ use crate::setup::questions_theme::get_questions_theme;
 use dialoguer::console::style;
 use dialoguer::{theme::ColorfulTheme, Select};
 
-pub fn select_disk(block_device_list: &Vec<disks::BlockDevice>) -> String {
+pub fn select_disk(block_device_list: &Vec<disks::BlockDevice>) -> disks::BlockDevice {
     let theme = ColorfulTheme {
         prompt_suffix: style(
             "═════════════════════════════════════════════════════════════════════════════"
@@ -46,5 +46,15 @@ pub fn select_disk(block_device_list: &Vec<disks::BlockDevice>) -> String {
         .interact()
         .unwrap();
 
-    (&block_device_list[selection].path).to_string()
+    // (&block_device_list[selection].path).to_string()
+    // &block_device_list[selection]
+
+    disks::BlockDevice {
+        name: (&block_device_list[selection].name).to_string(),
+        path: (&block_device_list[selection].path).to_string(),
+        model: (&block_device_list[selection].model).to_string(),
+        serial: (&block_device_list[selection].serial).to_string(),
+        size: (&block_device_list[selection].size).to_string(),
+        hotplug: *(&block_device_list[selection].hotplug),
+    }
 }

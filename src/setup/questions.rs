@@ -1,16 +1,16 @@
-use crate::setup::facts::Facts;
+use crate::setup::facts::{Facts, disks};
 
 mod disk;
 mod user;
 
 pub struct Answers {
-    pub disk_path: String,
+    pub disk: disks::BlockDevice,
     pub user: user::User,
 }
 
 pub fn ask_questions(facts_: &Facts) -> Answers {
     Answers {
-        disk_path: disk::select_disk(&facts_.disks),
+        disk: disk::select_disk(&facts_.disks),
         user: user::setup_user(),
     }
 }
