@@ -46,9 +46,6 @@ pub fn select_disk(block_device_list: &Vec<disks::BlockDevice>) -> disks::BlockD
         .interact()
         .unwrap();
 
-    // (&block_device_list[selection].path).to_string()
-    // &block_device_list[selection]
-
     disks::BlockDevice {
         name: (&block_device_list[selection].name).to_string(),
         path: (&block_device_list[selection].path).to_string(),
