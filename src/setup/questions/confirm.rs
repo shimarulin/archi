@@ -12,7 +12,8 @@ pub fn ask_confirm(block_device: &disks::BlockDevice) -> bool {
     );
 
     let warning_note = format!(
-        "  {note_start} {path}\n  {disk_info}\n  {note_danger} {note_end}",
+        "{left_border}{note_start} {path}\n{left_border}{disk_info}\n{left_border}{note_danger} {note_end}",
+        left_border = style("║ ").yellow(),
         note_start = style("Please note that all data on the").yellow(),
         path = style(&block_device.path).red(),
         disk_info = style(disk_info).yellow(),

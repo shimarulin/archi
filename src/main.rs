@@ -6,7 +6,7 @@ fn main() {
     let config = setup::setup();
 
     if config.answers.confirm == false {
-        println!("{}", style("\n  Canceled by user").blue());
+        println!("{}", style("\n  ╔══════════════════╗\n  ║ Canceled by user ║\n  ╚══════════════════╝").blue());
         std::process::exit(0)
     }
 
