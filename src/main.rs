@@ -1,6 +1,7 @@
 use dialoguer::console::style;
 
 mod setup;
+mod installer;
 
 fn main() {
     let config = setup::setup();
@@ -9,6 +10,10 @@ fn main() {
         println!("{}", style("\n  ╔══════════════════╗\n  ║ Canceled by user ║\n  ╚══════════════════╝").cyan());
         std::process::exit(0)
     }
+
+    installer::install(&config);
+
+    println!("Done");
 
     println!("firmware is {}", config.facts.firmware);
     println!("disk_path is {}", config.answers.disk.path);
