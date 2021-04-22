@@ -4,6 +4,7 @@ mod disk_partition;
 mod format_partitions;
 mod mount_partitions;
 mod umount_partitions;
+mod mount_subvolumes;
 
 pub fn install(config: &Config) {
     let subvolume_names = ["@", "@home"];
@@ -20,4 +21,7 @@ pub fn install(config: &Config) {
     }
 
     umount_partitions::umount_root();
+
+    mount_subvolumes::mount_root_subvolume(&*config.answers.disk.path);
+    mount_subvolumes::mount_home_subvolume(&*config.answers.disk.path);
 }
