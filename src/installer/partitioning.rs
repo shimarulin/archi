@@ -1,7 +1,7 @@
 use std::process::Command;
 
-pub fn create_partitions(path: &str, firmware: &str) {
-    let lsblk_output = Command::new("parted")
+pub fn create_partitions(path: &str) {
+    Command::new("parted")
         .arg("--script")
         .arg("--")
         .arg(path)
@@ -14,6 +14,5 @@ pub fn create_partitions(path: &str, firmware: &str) {
         .output()
         .expect("failed to execute parted");
 
-
-    println!("Done parted");
+    println!("Partitioning of {} is done.",  path);
 }
