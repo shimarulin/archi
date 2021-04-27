@@ -10,7 +10,7 @@ pub fn create_partitions(path: &str) {
         .args(&["set", "1 bios_grub on"])
         .args(&["mkpart", "\"EFI system\" fat32 2MiB 258MiB"])
         .args(&["mkpart", "\"Linux\" btrfs 258MiB -4001MiB"])
-        .args(&["mkpart", "\"Linux swap\" btrfs -4001MiB -1MiB"])
+        .args(&["mkpart", "\"Linux swap\" linux-swap -4001MiB -1MiB"])
         .output()
         .expect("failed to execute parted");
 
