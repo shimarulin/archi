@@ -1,27 +1,16 @@
 use crate::setup::Config;
 
-mod disk_partition;
-mod format_partitions;
-mod mount_partitions;
-mod umount_partitions;
-mod mount_subvolumes;
+mod disk;
+mod swap;
 
 pub fn install(config: &Config) {
-    let subvolume_names = ["@", "@home"];
+    let device_swap_path = format!("{}{}", config.answers.disk.path, "4");
 
-    disk_partition::create_partitions(&*config.answers.disk.path);
+    disk::parted(&*config.answers.disk.path);
 
-    format_partitions::swap_init(&*config.answers.disk.path);
-    format_partitions::system_format(&*config.answers.disk.path);
+    swap::init(&device_swap_path);
+    swap::on(&device_swap_path);
 
-    mount_partitions::enable_swap(&*config.answers.disk.path);
-    mount_partitions::mount_root(&*config.answers.disk.path);
-    for subvolume_name in &subvolume_names {
-        mount_partitions::create_subvolume(subvolume_name);
-    }
-
-    umount_partitions::umount_root();
-
-    mount_subvolumes::mount_root_subvolume(&*config.answers.disk.path);
-    mount_subvolumes::mount_home_subvolume(&*config.answers.disk.path);
+    disk::format(&*config.answers.disk.path);
+    disk::mount(&*config.answers.disk.path);
 }
