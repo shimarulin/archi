@@ -2,6 +2,7 @@ use crate::setup::Config;
 
 mod disk;
 mod swap;
+mod packages;
 
 pub fn install(config: &Config) {
     let device_swap_path = format!("{}{}", config.answers.disk.path, "4");
@@ -13,4 +14,6 @@ pub fn install(config: &Config) {
 
     disk::format(&*config.answers.disk.path);
     disk::mount(&*config.answers.disk.path);
+
+    packages::install();
 }

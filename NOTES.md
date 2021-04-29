@@ -2,6 +2,52 @@
 
 - https://ctlos.github.io/wiki/btrfs/btrfs-part1/
 
+```shell
+pacstrap /mnt base btrfs-progs grub linux linux-firmware nano
+genfstab -U /mnt >> /mnt/etc/fstab
+arch-chroot /mnt
+hostnamectl set-hostname shimarulin-arch-vm
+ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
+hwclock --systohc
+#passwd
+[root@archiso /]# touch /boot/grub/grub.cfg
+[root@archiso /]# touch /boot/grub/config.cfg
+[root@archiso /]# nano /boot/grub/grub.cfg
+[root@archiso /]# nano /boot/grub/config.cfg
+[root@archiso /]# nano /boot/grub/grub.cfg
+[root@archiso /]# nano /boot/grub/config.cfg
+[root@archiso /]# nano /etc/pacman.conf
+```
+
+```shell
+#  GNU nano 5.6.1 /boot/grub/grub.cfg                                                                                                                                                                                          Modified
+. $prefix/config.cfg
+```
+
+```shell
+#  GNU nano 5.6.1 /boot/grub/config.cfg  
+set timeout=5
+menuentry "Arch Linux" {
+  insmod btrfs
+  linux /@/boot/vmlinuz-linux root=LABEL=System ro rootflags=subvol=@
+  initrd /@/boot/initramfs-linux.img
+}
+```
+
+Прямая блокировка grub.cfg
+Чтобы защитить файл от любых изменений, присвойте ему атрибут immutable.
+```shell
+chattr +i /boot/grub/grub.cfg
+```
+Если основная конфигурация уже вынесена в другой файл, блокировку grub.cfg достаточно установить однажды и больше не снимать.
+
+Блокировка защитит файл от перезаписи скриптами установки пакетов. Чтобы избежать конфликта с файлом из пакета, добавьте его имя в строку NoUpgrade в /etc/pacman.conf:
+
+```shell
+#NoUpgrade   =
+NoUpgrade = boot/grub/grub.cfg
+```
+
 ### Lib
 
 - https://github.com/crossterm-rs/crossterm
