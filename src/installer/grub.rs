@@ -1,15 +1,56 @@
 use std::fs::OpenOptions;
 use std::io::Write;
-use std::process::{Command};
+use std::process::Command;
 
 fn grub_mbr_install(disk_path: &str) {
     Command::new("arch-chroot")
         .arg("/mnt")
-        .args(&["grub-install", &disk_path])
+        .args(&[
+            "grub-install",
+            "--target=i386-pc",
+            "--recheck",
+            "--boot-directory=/boot",
+            // "--force",
+            &disk_path,
+        ])
         .output()
         .expect("failed to execute grub-install");
 
-    println!("GRUB2 installed");
+    println!("GRUB2 BIOS installed");
+}
+
+fn grub_efi_install(disk_path: &str) {
+    let device_efi_path = format!("{}{}", disk_path, "2");
+    let boot_efi_path = "/mnt/boot/EFI";
+
+    Command::new("mkdir")
+        .arg("-p")
+        .arg(&boot_efi_path)
+        .output()
+        .expect("failed to execute mkdir");
+
+    Command::new("mount")
+        .arg(&device_efi_path)
+        .arg(&boot_efi_path)
+        .output()
+        .expect("failed to execute mount");
+
+    Command::new("arch-chroot")
+        .arg("/mnt")
+        .args(&[
+            "grub-install",
+            "--target=x86_64-efi",
+            "--recheck",
+            "--removable",
+            "--boot-directory=/boot",
+            "--efi-directory=/boot/EFI",
+            "--bootloader-id=arch",
+            // "--force",
+        ])
+        .output()
+        .expect("failed to execute grub-install");
+
+    println!("GRUB2 UEFI installed");
 }
 
 fn create_grub_entrypoint() {
@@ -66,6 +107,7 @@ fn protect_grub_cfg() {
 
 pub fn install(disk_path: &str) {
     grub_mbr_install(&disk_path);
+    grub_efi_install(&disk_path);
     create_grub_entrypoint();
     create_grub_config();
     protect_grub_cfg();

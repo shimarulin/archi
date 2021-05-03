@@ -17,6 +17,24 @@ pub fn parted(disk_path: &str) {
     println!("Partitioning of {} is done.", disk_path);
 }
 
+fn format_efi_partition(disk_partition_path: &str) {
+    let output = Command::new("mkfs.fat")
+        .arg("-F32")
+        // .args(&["--label", "EFI"])
+        .arg("--force")
+        .arg(&disk_partition_path)
+        .output()
+        .expect("failed to execute mkfs.fat");
+
+    let mut stdout = String::from_utf8(output.stdout).unwrap();
+    stdout.pop();
+
+    println!(
+        "fat32 filesystem on {} is created:\n{}",
+        disk_partition_path, stdout
+    );
+}
+
 fn format_system_partition(disk_partition_path: &str) {
     let output = Command::new("mkfs.btrfs")
         .args(&["--label", "System"])
@@ -64,9 +82,11 @@ fn create_subvolume(name: &str) {
 }
 
 pub fn format(disk_path: &str) {
+    let device_efi_path = format!("{}{}", disk_path, "2");
     let device_system_path = format!("{}{}", disk_path, "3");
     let subvolume_names = ["@", "@home"];
 
+    format_efi_partition(&device_efi_path);
     format_system_partition(&device_system_path);
     mount_system_partition(&device_system_path);
     for subvolume_name in &subvolume_names {
