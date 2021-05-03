@@ -5,6 +5,9 @@ mod swap;
 mod packages;
 mod fstab;
 mod grub;
+// mod time;
+// mod user;
+mod network;
 
 pub fn install(config: &Config) {
     let device_swap_path = format!("{}{}", config.answers.disk.path, "4");
@@ -20,4 +23,6 @@ pub fn install(config: &Config) {
     packages::install();
     fstab::generate();
     grub::install(&*config.answers.disk.path);
+
+    network::setup(&*config.answers.hostname);
 }
