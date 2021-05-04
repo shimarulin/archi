@@ -9,7 +9,7 @@ pub fn parted(disk_path: &str) {
         .args(&["mkpart", "\"BIOS boot\" fat32 1MiB 2MiB"])
         .args(&["set", "1", "bios_grub", "on"])
         .args(&["mkpart", "\"EFI system\" fat32 2MiB 258MiB"])
-        .args(&["set", "2", "esp", "on"])
+        .args(&["set", "2", "boot", "on"])
         .args(&["mkpart", "\"Linux\" btrfs 258MiB -4001MiB"])
         .args(&["mkpart", "\"Linux swap\" linux-swap -4001MiB -1MiB"])
         .stdout(Stdio::inherit())
@@ -135,7 +135,7 @@ fn mount_home_subvolume(disk_partition_path: &str) {
 }
 
 fn mount_efi_partition(disk_partition_path: &str) {
-    let boot_efi_path = "/mnt/boot/efi";
+    let boot_efi_path = "/mnt/boot";
 
     Command::new("mkdir")
         .arg("-p")

@@ -21,17 +21,19 @@ fn grub_mbr_install(disk_path: &str) {
     println!("GRUB2 BIOS installed");
 }
 
-fn grub_efi_install() {
+fn grub_efi_install(disk_path: &str) {
     Command::new("arch-chroot")
         .arg("/mnt")
         .args(&[
             "grub-install",
+            &disk_path,
             "--target=x86_64-efi",
-            "--recheck",
-            "--removable",
-            "--boot-directory=/boot",
-            "--efi-directory=/boot/efi",
-            "--bootloader-id=arch",
+            "--efi-directory=/boot",
+            // "--recheck",
+            // "--removable",
+            // "--boot-directory=/boot",
+            // "--efi-directory=/boot/efi",
+            // "--bootloader-id=arch",
             // "--force",
         ])
         .stdout(Stdio::inherit())
@@ -112,7 +114,7 @@ fn protect_grub_cfg() {
 
 pub fn install(disk_path: &str) {
     // grub_mbr_install(&disk_path);
-    grub_efi_install();
+    grub_efi_install(&disk_path);
     grub_mkconfig();
     // create_grub_entrypoint();
     // create_grub_config();

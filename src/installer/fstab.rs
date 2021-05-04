@@ -12,7 +12,7 @@ pub fn generate() {
         .expect("Couldn't open /mnt/etc/fstab file.");
 
     let output = Command::new("genfstab")
-        .args(&["-U", "/mnt"])
+        .args(&["-U", "-p", "/mnt"])
         .output()
         .expect("failed to execute genfstab");
 
