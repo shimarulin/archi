@@ -22,7 +22,7 @@ pub fn install(config: &Config) {
 
     packages::install();
     fstab::generate();
-    grub::install(&*config.answers.disk.path);
+    grub::install(&*config.answers.disk.path, &*config.facts.firmware);
 
     network::setup(&*config.answers.hostname);
 }

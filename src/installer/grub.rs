@@ -16,7 +16,7 @@ fn grub_mbr_install(disk_path: &str) {
         .stdout(Stdio::inherit())
         .stderr(Stdio::inherit())
         .output()
-        .expect("failed to execute grub-install");
+        .expect("ERR");
 
     println!("GRUB2 BIOS installed");
 }
@@ -36,7 +36,7 @@ fn grub_efi_install(disk_path: &str) {
         .stdout(Stdio::inherit())
         .stderr(Stdio::inherit())
         .output()
-        .expect("failed to execute grub-install");
+        .expect("ERR");
 
     println!("GRUB2 UEFI installed");
 }
@@ -103,19 +103,46 @@ menuentry \"Arch Linux\" {
 fn protect_grub_cfg() {
     Command::new("chattr")
         .args(&["+i", "/mnt/boot/grub/grub.cfg"])
+        .stdout(Stdio::inherit())
+        .stderr(Stdio::inherit())
         .output()
-        .expect("failed to execute chattr");
+        .expect("ERR");
 
     println!("grub.cfg protected");
 }
 
-pub fn install(disk_path: &str) {
+fn create_efi_option(disk_path: &str) {
+    Command::new("arch-chroot")
+        .arg("/mnt")
+        .args(&[
+            "efibootmgr",
+            "-c",
+            "-d",
+            &disk_path,
+            "-p",
+            "2", // EFI System partition
+            "-L",
+            "\"Arch Linux\"",
+            "\"\\efi\\boot\\bootx64.efi\"",
+        ])
+        .stdout(Stdio::inherit())
+        .stderr(Stdio::inherit())
+        .output()
+        .expect("ERR");
+
+    println!("UEFI boot option created");
+}
+
+pub fn install(disk_path: &str, firmware: &str) {
     grub_mbr_install(&disk_path);
     grub_efi_install(&disk_path);
     grub_mkconfig();
     // create_grub_entrypoint();
     // create_grub_config();
     // protect_grub_cfg();
+    if firmware == "UEFI" {
+        create_efi_option(&disk_path);
+    }
 
     println!("GRUB bootloader installed");
 }
