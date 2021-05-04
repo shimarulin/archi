@@ -26,15 +26,12 @@ fn grub_efi_install(disk_path: &str) {
         .arg("/mnt")
         .args(&[
             "grub-install",
-            &disk_path,
             "--target=x86_64-efi",
+            "--recheck",
+            "--removable",
+            "--boot-directory=/boot",
             "--efi-directory=/boot",
-            // "--recheck",
-            // "--removable",
-            // "--boot-directory=/boot",
-            // "--efi-directory=/boot/efi",
-            // "--bootloader-id=arch",
-            // "--force",
+            &disk_path,
         ])
         .stdout(Stdio::inherit())
         .stderr(Stdio::inherit())
@@ -113,7 +110,7 @@ fn protect_grub_cfg() {
 }
 
 pub fn install(disk_path: &str) {
-    // grub_mbr_install(&disk_path);
+    grub_mbr_install(&disk_path);
     grub_efi_install(&disk_path);
     grub_mkconfig();
     // create_grub_entrypoint();
