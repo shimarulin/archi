@@ -48,6 +48,15 @@ chattr +i /boot/grub/grub.cfg
 NoUpgrade = boot/grub/grub.cfg
 ```
 
+```shell
+arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
+#    Generating grub configuration file ...
+#    Found linux image: /boot/vmlinuz-linux
+#    Found initrd image: /boot/initramfs-linux.img
+#    Found fallback initrd image(s) in /boot: initramfs-linux-fallback.img
+#    done
+```
+
 ### Lib
 
 - https://github.com/crossterm-rs/crossterm

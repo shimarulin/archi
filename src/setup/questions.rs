@@ -15,8 +15,8 @@ pub struct Answers {
 pub fn ask_questions(facts_: &Facts) -> Answers {
     let disk_ = disk::select_disk(&facts_.disks);
     let user_ = user::setup_user();
-    let confirm_ = confirm::ask_confirm(&disk_);
     let hostname_ = hostname::input_hostname();
+    let confirm_ = confirm::ask_confirm(&disk_);
 
     Answers {
         disk: disk_,

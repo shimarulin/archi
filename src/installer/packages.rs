@@ -16,6 +16,7 @@ pub fn install() {
             "networkmanager",
         ])
         .stdout(Stdio::inherit())
+        .stderr(Stdio::inherit())
         .output()
         .expect("failed to execute pacstrap");
 }

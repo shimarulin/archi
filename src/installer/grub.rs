@@ -1,6 +1,6 @@
 use std::fs::OpenOptions;
 use std::io::Write;
-use std::process::Command;
+use std::process::{Command, Stdio};
 
 fn grub_mbr_install(disk_path: &str) {
     Command::new("arch-chroot")
@@ -13,28 +13,15 @@ fn grub_mbr_install(disk_path: &str) {
             // "--force",
             &disk_path,
         ])
+        .stdout(Stdio::inherit())
+        .stderr(Stdio::inherit())
         .output()
         .expect("failed to execute grub-install");
 
     println!("GRUB2 BIOS installed");
 }
 
-fn grub_efi_install(disk_path: &str) {
-    let device_efi_path = format!("{}{}", disk_path, "2");
-    let boot_efi_path = "/mnt/boot/EFI";
-
-    Command::new("mkdir")
-        .arg("-p")
-        .arg(&boot_efi_path)
-        .output()
-        .expect("failed to execute mkdir");
-
-    Command::new("mount")
-        .arg(&device_efi_path)
-        .arg(&boot_efi_path)
-        .output()
-        .expect("failed to execute mount");
-
+fn grub_efi_install() {
     Command::new("arch-chroot")
         .arg("/mnt")
         .args(&[
@@ -43,14 +30,32 @@ fn grub_efi_install(disk_path: &str) {
             "--recheck",
             "--removable",
             "--boot-directory=/boot",
-            "--efi-directory=/boot/EFI",
+            "--efi-directory=/boot/efi",
             "--bootloader-id=arch",
             // "--force",
         ])
+        .stdout(Stdio::inherit())
+        .stderr(Stdio::inherit())
         .output()
         .expect("failed to execute grub-install");
 
     println!("GRUB2 UEFI installed");
+}
+
+fn grub_mkconfig() {
+    Command::new("arch-chroot")
+        .arg("/mnt")
+        .args(&[
+            "grub-mkconfig",
+            "-o",
+            "/boot/grub/grub.cfg",
+        ])
+        .stdout(Stdio::inherit())
+        .stderr(Stdio::inherit())
+        .output()
+        .expect("ERR");
+
+    println!("GRUB2 mkconfig");
 }
 
 fn create_grub_entrypoint() {
@@ -106,11 +111,12 @@ fn protect_grub_cfg() {
 }
 
 pub fn install(disk_path: &str) {
-    grub_mbr_install(&disk_path);
-    grub_efi_install(&disk_path);
-    create_grub_entrypoint();
-    create_grub_config();
-    protect_grub_cfg();
+    // grub_mbr_install(&disk_path);
+    grub_efi_install();
+    grub_mkconfig();
+    // create_grub_entrypoint();
+    // create_grub_config();
+    // protect_grub_cfg();
 
     println!("GRUB bootloader installed");
 }
