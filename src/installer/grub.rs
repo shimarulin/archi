@@ -42,6 +42,7 @@ fn grub_efi_install(disk_path: &str) {
 }
 
 fn grub_mkconfig() {
+    // TODO: replace to custom config
     Command::new("arch-chroot")
         .arg("/mnt")
         .args(&[
@@ -122,8 +123,9 @@ fn create_efi_option(disk_path: &str) {
             "-p",
             "2", // EFI System partition
             "-L",
-            "\"Arch Linux\"",
-            "\"\\efi\\boot\\bootx64.efi\"",
+            "Arch Linux",
+            "-l",
+            "\\EFI\\BOOT\\BOOTX64.EFI",
         ])
         .stdout(Stdio::inherit())
         .stderr(Stdio::inherit())
