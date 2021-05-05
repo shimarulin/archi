@@ -1,15 +1,20 @@
 use std::fs::OpenOptions;
 use std::io::Write;
-use std::process::{Command};
+use std::process::{Command, Stdio};
 
 fn set_hostname(hostname: &str) {
-    Command::new("arch-chroot")
+    // TODO: just write file
+    let output = Command::new("arch-chroot")
         .arg("/mnt")
         .args(&["hostnamectl", "set-hostname", &hostname])
+        .stdout(Stdio::inherit())
+        .stderr(Stdio::inherit())
         .output()
         .expect("failed to execute hostnamectl");
 
-    println!("hostname created");
+    if output.status.success() {
+        println!("hostname updated");
+    }
 }
 
 fn update_hosts_file(hostname: &str) {
