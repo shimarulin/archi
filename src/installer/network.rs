@@ -1,20 +1,20 @@
-use std::fs::OpenOptions;
+use std::fs::{OpenOptions, File};
 use std::io::Write;
-use std::process::{Command, Stdio};
+use std::path::Path;
 
 fn set_hostname(hostname: &str) {
-    // TODO: just write file
-    let output = Command::new("arch-chroot")
-        .arg("/mnt")
-        .args(&["hostnamectl", "set-hostname", &hostname])
-        .stdout(Stdio::inherit())
-        .stderr(Stdio::inherit())
-        .output()
-        .expect("failed to execute hostnamectl");
+    let path = Path::new("/mnt/etc/hostname");
+    let display = path.display();
 
-    if output.status.success() {
-        println!("hostname updated");
-    }
+    let mut file = match File::create(&path) {
+        Err(why) => panic!("couldn't create {}: {}", display, why),
+        Ok(file) => file,
+    };
+
+    match file.write_all(hostname.as_bytes()) {
+        Err(why) => panic!("couldn't write to {}: {}", display, why),
+        Ok(_) => println!("successfully wrote hostname '{}' to {}", hostname, display),
+    };
 }
 
 fn update_hosts_file(hostname: &str) {
