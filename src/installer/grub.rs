@@ -1,5 +1,6 @@
-use std::fs::OpenOptions;
+use std::fs::{File, OpenOptions};
 use std::io::Write;
+use std::path::Path;
 use std::process::{Command, Stdio};
 
 fn grub_mbr_install(disk_path: &str) {
@@ -30,26 +31,20 @@ fn grub_efi_install(disk_path: &str) {
             "--recheck",
             "--removable",
             "--boot-directory=/boot",
-            "--efi-directory=/boot",
+            "--efi-directory=/boot/efi",
             &disk_path,
         ])
         .stdout(Stdio::inherit())
         .stderr(Stdio::inherit())
         .output()
         .expect("ERR");
-
-    println!("GRUB2 UEFI installed");
 }
 
 fn grub_mkconfig() {
     // TODO: replace to custom config
     Command::new("arch-chroot")
         .arg("/mnt")
-        .args(&[
-            "grub-mkconfig",
-            "-o",
-            "/boot/grub/grub.cfg",
-        ])
+        .args(&["grub-mkconfig", "-o", "/boot/grub/grub.cfg"])
         .stdout(Stdio::inherit())
         .stderr(Stdio::inherit())
         .output()
@@ -76,30 +71,52 @@ fn create_grub_entrypoint() {
     println!("{} created", cfg_file_path);
 }
 
-fn create_grub_config() {
-    let cfg_file_path = "/mnt/boot/grub/config.cfg";
-    let mut cfg_file = OpenOptions::new()
-        .read(true)
-        .write(true)
-        .create(true)
-        .open(&cfg_file_path)
-        .ok()
-        .expect(&*format!("Couldn't open {} file.", cfg_file_path));
+// fn create_grub_config() {
+//     let cfg_file_path = "/mnt/boot/grub/config.cfg";
+//     let mut cfg_file = OpenOptions::new()
+//         .read(true)
+//         .write(true)
+//         .create(true)
+//         .open(&cfg_file_path)
+//         .ok()
+//         .expect(&*format!("Couldn't open {} file.", cfg_file_path));
+//
+//     let content = "set timeout=5
+// menuentry \"Arch Linux\" {
+//   insmod btrfs
+//   linux /@/boot/vmlinuz-linux root=LABEL=System ro rootflags=subvol=@
+//   initrd /@/boot/initramfs-linux.img
+// }";
+//
+//     cfg_file
+//         .write_all(&content.as_ref())
+//         .ok()
+//         .expect(&*format!("Couldn't write {} file.", cfg_file_path));
+//
+//     println!("{} created", cfg_file_path);
+// }
 
-    let content = "set timeout=5
-menuentry \"Arch Linux\" {
-  insmod btrfs
-  linux /@/boot/vmlinuz-linux root=LABEL=System ro rootflags=subvol=@
-  initrd /@/boot/initramfs-linux.img
-}";
-
-    cfg_file
-        .write_all(&content.as_ref())
-        .ok()
-        .expect(&*format!("Couldn't write {} file.", cfg_file_path));
-
-    println!("{} created", cfg_file_path);
-}
+// fn create_grub_config() {
+//     let path = Path::new("/mnt/boot/grub/config.cfg");
+//     let display = path.display();
+//
+//     let mut file = match File::create(&path) {
+//         Err(why) => panic!("couldn't create {}: {}", display, why),
+//         Ok(file) => file,
+//     };
+//
+//     let content = "set timeout=5
+// menuentry \"Arch Linux\" {
+//   insmod btrfs
+//   linux /vmlinuz-linux root=LABEL=System ro rootflags=subvol=@
+//   initrd /initramfs-linux.img
+// }";
+//
+//     match file.write_all(hostname.as_bytes()) {
+//         Err(why) => panic!("couldn't write to {}: {}", display, why),
+//         Ok(_) => println!("successfully wrote hostname '{}' to {}", hostname, display),
+//     };
+// }
 
 fn protect_grub_cfg() {
     Command::new("chattr")

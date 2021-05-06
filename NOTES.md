@@ -57,6 +57,10 @@ arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 #    done
 ```
 
+#### Installation articles
+
+- [UEFI Boot exec with Dracut on Arch Linux](http://3.123.67.145/)
+
 ### Lib
 
 - https://github.com/crossterm-rs/crossterm

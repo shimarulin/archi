@@ -2,6 +2,14 @@
 
 > Just another experimental Arch installer
 
+## Installation notes
+
+If you move the disc after installation to another computer with UEFI, do not forget to generate a new UEFI menu item (`/dev/sda` - your disk with installed Arch Linux):
+
+```shell
+efibootmgr -c -d /dev/sda -p 2 -L "Arch Linux" -l "\EFI\BOOT\BOOTX64.EFI"
+```
+
 ## Development
 
 ### Development dependencies

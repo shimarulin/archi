@@ -135,7 +135,7 @@ fn mount_home_subvolume(disk_partition_path: &str) {
 }
 
 fn mount_efi_partition(disk_partition_path: &str) {
-    let boot_efi_path = "/mnt/boot";
+    let boot_efi_path = "/mnt/boot/efi";
 
     Command::new("mkdir")
         .arg("-p")
