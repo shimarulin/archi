@@ -91,14 +91,30 @@ fn create_efi_option(disk_path: &str) {
     println!("UEFI boot option created");
 }
 
+fn grub_mkconfig() {
+    Command::new("arch-chroot")
+        .arg("/mnt")
+        .args(&[
+            "grub-mkconfig",
+            "-o",
+            "/boot/grub/grub.cfg",
+        ])
+        .stdout(Stdio::inherit())
+        .stderr(Stdio::inherit())
+        .output()
+        .expect("ERR");
+}
+
 pub fn install(disk_path: &str, firmware: &str) {
     grub_mbr_install(&disk_path);
     grub_efi_install(&disk_path);
 
-    create_grub_cfg();
-    create_grub_config_cfg();
-    protect_grub_cfg();
-    add_grub_cfg_to_pacman_ignore();
+    grub_mkconfig();
+
+    // create_grub_cfg();
+    // create_grub_config_cfg();
+    // protect_grub_cfg();
+    // add_grub_cfg_to_pacman_ignore();
 
     if firmware == "UEFI" {
         create_efi_option(&disk_path);
