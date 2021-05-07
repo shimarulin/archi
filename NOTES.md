@@ -1,5 +1,11 @@
 ### Installation process
 
+#### Questions
+
+- initramfs: mkinitcpio, dracut, booster?
+
+---
+
 - https://ctlos.github.io/wiki/btrfs/btrfs-part1/
 
 ```shell

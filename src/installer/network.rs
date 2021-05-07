@@ -1,3 +1,4 @@
+use crate::utils::cmd;
 use crate::utils::file;
 
 fn set_hostname(hostname: &str) {
@@ -5,16 +6,27 @@ fn set_hostname(hostname: &str) {
 }
 
 fn update_hosts_file(hostname: &str) {
-    let content = format!("\
+    let content = format!(
+        "\
 127.0.0.1        localhost
 ::1              localhost
 127.0.1.1        {hostname}.localdomain        {hostname}
-", hostname = hostname);
+",
+        hostname = hostname
+    );
 
     file::append("/mnt/etc/hosts", &*content);
 }
 
-pub fn setup (hostname: &str) {
+fn nm_enable() {
+    cmd::exec(
+        "arch-chroot",
+        &["/mnt", "systemctl", "enable", "NetworkManager.service"],
+    )
+}
+
+pub fn setup(hostname: &str) {
     set_hostname(&hostname);
     update_hosts_file(&hostname);
+    nm_enable();
 }
