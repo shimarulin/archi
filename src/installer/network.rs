@@ -1,20 +1,10 @@
 use std::fs::{OpenOptions, File};
 use std::io::Write;
 use std::path::Path;
+use crate::utils::file;
 
 fn set_hostname(hostname: &str) {
-    let path = Path::new("/mnt/etc/hostname");
-    let display = path.display();
-
-    let mut file = match File::create(&path) {
-        Err(why) => panic!("couldn't create {}: {}", display, why),
-        Ok(file) => file,
-    };
-
-    match file.write_all(hostname.as_bytes()) {
-        Err(why) => panic!("couldn't write to {}: {}", display, why),
-        Ok(_) => println!("successfully wrote hostname '{}' to {}", hostname, display),
-    };
+    file::create("/mnt/etc/hostname", &hostname);
 }
 
 fn update_hosts_file(hostname: &str) {
