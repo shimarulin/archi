@@ -2,6 +2,7 @@ use dialoguer::console::style;
 
 mod setup;
 mod installer;
+mod utils;
 
 fn main() {
     let config = setup::setup();
