@@ -1,6 +1,7 @@
+use std::fs::{File, OpenOptions};
+use std::io::{BufReader, Read, Write};
 use std::path::Path;
-use std::fs::File;
-use std::io::{Write, BufReader, Read};
+use std::fs;
 
 pub fn create(path: &str, content: &str) {
     let path_ = Path::new(path);
@@ -21,7 +22,7 @@ pub fn replace_string(path: &str, from: &str, to: &str) {
     let path_ = Path::new(path);
     let display = path_.display();
 
-    let mut file = match File::open(&path_) {
+    let file = match OpenOptions::new().read(true).write(true).open(&path_) {
         Err(why) => panic!("couldn't open {}: {}", display, why),
         Ok(file) => file,
     };
@@ -30,12 +31,12 @@ pub fn replace_string(path: &str, from: &str, to: &str) {
 
     match buf_reader.read_to_string(&mut source_string) {
         Err(why) => panic!("couldn't read to buffer from file {}: {}", display, why),
-        Ok(_) => {},
+        Ok(_) => {}
     };
 
     let target_string = source_string.replace(&*from, &*to);
 
-    match file.write_all(target_string.as_bytes()) {
+    match fs::write(path_, target_string.as_bytes()) {
         Err(why) => panic!("couldn't write to {}: {}", display, why),
         Ok(_) => println!("successfully wrote {}", display),
     };
@@ -45,7 +46,7 @@ pub fn append(path: &str, content: &str) {
     let path_ = Path::new(path);
     let display = path_.display();
 
-    let mut file = match File::open(&path_) {
+    let mut file = match OpenOptions::new().read(true).append(true).open(&path_) {
         Err(why) => panic!("couldn't open {}: {}", display, why),
         Ok(file) => file,
     };
@@ -54,12 +55,10 @@ pub fn append(path: &str, content: &str) {
 
     match buf_reader.read_to_string(&mut source_string) {
         Err(why) => panic!("couldn't read to buffer from file {}: {}", display, why),
-        Ok(_) => {},
+        Ok(_) => {}
     };
 
-    let target_string = format!("{}{}", source_string, content);
-
-    match file.write_all(target_string.as_bytes()) {
+    match file.write_all(content.as_bytes()) {
         Err(why) => panic!("couldn't write to {}: {}", display, why),
         Ok(_) => println!("successfully wrote {}", display),
     };
