@@ -62,6 +62,10 @@ fn protect_grub_cfg() {
     println!("grub.cfg protected");
 }
 
+fn add_grub_cfg_to_pacman_ignore() {
+    file::replace_string("/mnt/etc/pacman.conf", "#NoUpgrade   =", "NoUpgrade   = boot/grub/grub.cfg");
+}
+
 fn create_efi_option(disk_path: &str) {
     Command::new("arch-chroot")
         .arg("/mnt")
@@ -88,10 +92,12 @@ fn create_efi_option(disk_path: &str) {
 pub fn install(disk_path: &str, firmware: &str) {
     grub_mbr_install(&disk_path);
     grub_efi_install(&disk_path);
-    // grub_mkconfig();
+
     create_grub_cfg();
     create_grub_config_cfg();
     protect_grub_cfg();
+    add_grub_cfg_to_pacman_ignore();
+
     if firmware == "UEFI" {
         create_efi_option(&disk_path);
     }
