@@ -1,12 +1,15 @@
 use std::io::Write;
 use std::process::{Command, Stdio};
+use crate::utils::file;
+use crate::utils::cmd;
 
-pub fn set_root_password(password: &str) {
+pub fn set_user_password(username: &str, password: &str) {
     let passwd_input = format!("{p}\n{p}", p = password);
 
     let mut process = match Command::new("arch-chroot")
         .arg("/mnt")
         .arg("passwd")
+        .arg(&username)
         .stdin(Stdio::piped())
         .spawn()
     {
@@ -29,4 +32,38 @@ pub fn set_root_password(password: &str) {
     if output.status.success() {
         println!("{}", String::from_utf8(output.stdout).unwrap());
     }
+}
+
+pub fn create_user(username: &str) {
+    cmd::exec(
+        "arch-chroot",
+        &["/mnt", "useradd", "-m", &username],
+    )
+}
+
+pub fn add_user_to_groups(username: &str, groups: &[&str]) {
+    cmd::exec(
+        "arch-chroot",
+        &[&["/mnt", "usermod", "--append", "--groups"], groups, &[username]].concat(),
+    )
+}
+
+pub fn lock_login_as_root() {
+    cmd::exec(
+        "arch-chroot",
+        &["/mnt", "passwd", "-l", "root"],
+    )
+}
+
+pub fn enable_wheel_group() {
+    file::replace_string("/mnt/etc/sudoers", "# %wheel ALL=(ALL) ALL", "%wheel ALL=(ALL) ALL")
+}
+
+pub fn setup(username: &str, password: &str) {
+    set_user_password("root", &password);
+    create_user(&username);
+    set_user_password(&username, &password);
+    enable_wheel_group();
+    add_user_to_groups(&username, &["wheel"]);
+    lock_login_as_root();
 }

@@ -14,6 +14,7 @@ pub fn install() {
             "linux-firmware",
             "nano",
             "networkmanager",
+            "sudo",
         ])
         .stdout(Stdio::inherit())
         .stderr(Stdio::inherit())

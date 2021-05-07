@@ -24,7 +24,7 @@ pub fn install(config: &Config) {
     fstab::generate();
     grub::install(&*config.answers.disk.path, &*config.facts.firmware);
 
-    user::set_root_password(&*config.answers.user.password);
+    user::setup(&*config.answers.user.username, &*config.answers.user.password);
 
     network::setup(&*config.answers.hostname);
 }
