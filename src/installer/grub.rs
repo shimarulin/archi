@@ -43,9 +43,11 @@ fn create_grub_cfg() {
 }
 
 fn create_grub_config_cfg() {
-    let content = "set timeout=5
+    let content = "set default=0
+set timeout=5
 menuentry \"Arch Linux\" {
-  linux /@/boot/vmlinuz-linux root=LABEL=System ro rootflags=subvol=@
+  probe --set=UUID --fs-uuid $root
+  linux /@/boot/vmlinuz-linux root=UUID=$UUID ro rootflags=subvol=@
   initrd /@/boot/initramfs-linux.img
 }";
     file::create("/mnt/boot/grub/config.cfg", content);
