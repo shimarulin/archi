@@ -1,5 +1,5 @@
 use std::process::{Command, Stdio};
-use crate::utils::file;
+// use crate::utils::file;
 
 fn grub_mbr_install(disk_path: &str) {
     Command::new("arch-chroot")
