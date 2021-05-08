@@ -19,10 +19,16 @@ fn update_hosts_file(hostname: &str) {
 }
 
 fn nm_enable() {
+    // enable NetworkManager
     cmd::exec(
         "arch-chroot",
         &["/mnt", "systemctl", "enable", "NetworkManager.service"],
-    )
+    );
+    // enable Wi-Fi
+    cmd::exec(
+        "arch-chroot",
+        &["/mnt", "systemctl", "enable", "wpa_supplicant.service"],
+    );
 }
 
 pub fn setup(hostname: &str) {
