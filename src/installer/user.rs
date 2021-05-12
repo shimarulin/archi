@@ -60,7 +60,6 @@ pub fn enable_wheel_group() {
 }
 
 pub fn setup(username: &str, password: &str) {
-    set_user_password("root", &password);
     create_user(&username);
     set_user_password(&username, &password);
     enable_wheel_group();
