@@ -1,6 +1,21 @@
 # Archi
 
-> Just another experimental Arch installer
+> Just another Arch installer
+
+## Principles
+
+- Use the original Arch Linux installation image
+- Use minimal but sufficient setup
+- Use the most automated installation and configuration process
+- Ensure disk portability between different hardware as much as possible
+
+## Features
+
+- UEFI and BIOS compatible disk layout and bootloader (used GRUB2)
+- Btrfs subvolumes for root and home directories
+- Add new user with `sudo` for granting administrator privileges to a user
+- Login for `root` user is disabled by default
+- Used NetworkManager for manage connections
 
 ## Installation notes
 
