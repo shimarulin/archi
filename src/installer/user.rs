@@ -38,21 +38,21 @@ pub fn create_user(username: &str) {
     cmd::exec(
         "arch-chroot",
         &["/mnt", "useradd", "-m", &username],
-    )
+    );
 }
 
 pub fn add_user_to_groups(username: &str, groups: &[&str]) {
     cmd::exec(
         "arch-chroot",
         &[&["/mnt", "usermod", "--append", "--groups"], groups, &[username]].concat(),
-    )
+    );
 }
 
 pub fn lock_login_as_root() {
     cmd::exec(
         "arch-chroot",
         &["/mnt", "passwd", "-l", "root"],
-    )
+    );
 }
 
 pub fn enable_wheel_group() {
