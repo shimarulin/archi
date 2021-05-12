@@ -1,87 +1,55 @@
-use std::process::{Command, Stdio};
+use crate::utils::cmd;
 
 pub fn parted(disk_path: &str) {
-    Command::new("parted")
-        .arg("--script")
-        .arg("--")
-        .arg(disk_path)
-        .args(&["mklabel", "gpt"])
-        .args(&["mkpart", "\"BIOS boot\" fat32 1MiB 2MiB"])
-        .args(&["set", "1", "bios_grub", "on"])
-        .args(&["mkpart", "\"EFI system\" fat32 2MiB 258MiB"])
-        .args(&["set", "2", "boot", "on"])
-        .args(&["mkpart", "\"Linux\" btrfs 258MiB -4001MiB"])
-        .args(&["mkpart", "\"Linux swap\" linux-swap -4001MiB -1MiB"])
-        .stdout(Stdio::inherit())
-        .stderr(Stdio::inherit())
-        .output()
-        .expect("ERR");
+    cmd::exec(
+        "parted",
+        vec![
+            vec!["--script", "--", disk_path],
+            vec!["mklabel", "gpt"],
+            vec!["mkpart", "\"BIOS boot\" fat32 1MiB 2MiB"],
+            vec!["set", "1", "bios_grub", "on"],
+            vec!["mkpart", "\"EFI system\" fat32 2MiB 258MiB"],
+            vec!["set", "2", "boot", "on"],
+            vec!["mkpart", "\"Linux\" btrfs 258MiB -4001MiB"],
+            vec!["mkpart", "\"Linux swap\" linux-swap -4001MiB -1MiB"],
+        ]
+        .concat()
+        .as_slice(),
+    );
 
     println!("Partitioning of {} is done.", disk_path);
 }
 
 fn format_efi_partition(disk_partition_path: &str) {
-    Command::new("mkfs.fat")
-        .arg("-F32")
-        .arg(&disk_partition_path)
-        .stdout(Stdio::inherit())
-        .stderr(Stdio::inherit())
-        .output()
-        .expect("ERR");
+    cmd::exec("mkfs.fat", &["-F32", disk_partition_path]);
 
-    println!(
-        "fat32 filesystem created on {}",
-        disk_partition_path
-    );
+    println!("fat32 filesystem created on {}", disk_partition_path);
 }
 
 fn format_system_partition(disk_partition_path: &str) {
-    Command::new("mkfs.btrfs")
-        .args(&["--label", "System"])
-        .arg("--force")
-        .arg(&disk_partition_path)
-        .stdout(Stdio::inherit())
-        .stderr(Stdio::inherit())
-        .output()
-        .expect("ERR");
-
-    println!(
-        "btrfs filesystem created on {}",
-        disk_partition_path
+    cmd::exec(
+        "mkfs.btrfs",
+        &["--label", "System", "--force", disk_partition_path],
     );
+
+    println!("btrfs filesystem created on {}", disk_partition_path);
 }
 
 fn mount_system_partition(disk_partition_path: &str) {
-    Command::new("mount")
-        .arg(&disk_partition_path)
-        .stdout(Stdio::inherit())
-        .stderr(Stdio::inherit())
-        .arg("/mnt")
-        .output()
-        .expect("ERR");
+    cmd::exec("mount", &[disk_partition_path, "/mnt"]);
 
     println!("{} is mounted to /mnt", disk_partition_path);
 }
 
 fn umount_system_partition() {
-    Command::new("umount")
-        .arg("/mnt")
-        .stdout(Stdio::inherit())
-        .stderr(Stdio::inherit())
-        .output()
-        .expect("ERR");
+    cmd::exec("umount", &["/mnt"]);
 
     println!("filesystem on /mnt is unmounted");
 }
 
 fn create_subvolume(name: &str) {
     let subvolume_path: &str = &*format!("{}{}", "/mnt/", name);
-    Command::new("btrfs")
-        .args(&["subvolume", "create", subvolume_path])
-        .stdout(Stdio::inherit())
-        .stderr(Stdio::inherit())
-        .output()
-        .expect("ERR");
+    cmd::exec("btrfs", &["subvolume", "create", subvolume_path]);
 
     println!("btrfs subvolume {} created", subvolume_path);
 }
@@ -101,57 +69,35 @@ pub fn format(disk_path: &str) {
 }
 
 fn mount_root_subvolume(disk_partition_path: &str) {
-    Command::new("mount")
-        .args(&["-o", "subvol=@,compress=zstd"])
-        .arg(&disk_partition_path)
-        .arg("/mnt")
-        .stdout(Stdio::inherit())
-        .stderr(Stdio::inherit())
-        .output()
-        .expect("ERR");
+    cmd::exec(
+        "mount",
+        &["-o", "subvol=@,compress=zstd", disk_partition_path, "/mnt"],
+    );
 
-    println!("btrfs subvolume @ on disk {} mounted to /mnt", disk_partition_path);
+    println!(
+        "btrfs subvolume @ on disk {} mounted to /mnt",
+        disk_partition_path
+    );
 }
 
 fn mount_home_subvolume(disk_partition_path: &str) {
-    Command::new("mkdir")
-        .arg("-p")
-        .arg("/mnt/home")
-        .stdout(Stdio::inherit())
-        .stderr(Stdio::inherit())
-        .output()
-        .expect("ERR");
+    cmd::exec("mkdir", &["-p", "/mnt/home"]);
+    cmd::exec(
+        "mount",
+        &["-o", "subvol=@home,compress=zstd", disk_partition_path, "/mnt/home"],
+    );
 
-    Command::new("mount")
-        .args(&["-o", "subvol=@home,compress=zstd"])
-        .arg(&disk_partition_path)
-        .arg("/mnt/home")
-        .stdout(Stdio::inherit())
-        .stderr(Stdio::inherit())
-        .output()
-        .expect("ERR");
-
-    println!("btrfs subvolume @home on disk {} mounted to /mnt/home", disk_partition_path);
+    println!(
+        "btrfs subvolume @home on disk {} mounted to /mnt/home",
+        disk_partition_path
+    );
 }
 
 fn mount_efi_partition(disk_partition_path: &str) {
     let boot_efi_path = "/mnt/boot/efi";
 
-    Command::new("mkdir")
-        .arg("-p")
-        .arg(&boot_efi_path)
-        .stdout(Stdio::inherit())
-        .stderr(Stdio::inherit())
-        .output()
-        .expect("ERR");
-
-    Command::new("mount")
-        .arg(&disk_partition_path)
-        .arg(&boot_efi_path)
-        .stdout(Stdio::inherit())
-        .stderr(Stdio::inherit())
-        .output()
-        .expect("ERR");
+    cmd::exec("mkdir", &["-p", boot_efi_path]);
+    cmd::exec("mount", &[disk_partition_path, boot_efi_path]);
 
     println!("{} is mounted to {}", disk_partition_path, boot_efi_path);
 }
