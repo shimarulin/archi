@@ -1,23 +1,25 @@
-use std::process::{Command, Stdio};
+use crate::utils::cmd;
 
 pub fn install() {
     println!("Install packages");
-    Command::new("pacstrap")
-        .arg("/mnt")
-        .args(&[
-            "base",
-            "btrfs-progs",
-            "grub",
-            "efibootmgr",
-            "dosfstools",
-            "linux",
-            "linux-firmware",
-            "nano",
-            "networkmanager",
-            "sudo",
-        ])
-        .stdout(Stdio::inherit())
-        .stderr(Stdio::inherit())
-        .output()
-        .expect("failed to execute pacstrap");
+    cmd::exec(
+        "arch-chroot",
+        vec![
+            vec!["/mnt"],
+            vec![
+                "base",
+                "btrfs-progs",
+                "grub",
+                "efibootmgr",
+                "dosfstools",
+                "linux",
+                "linux-firmware",
+                "nano",
+                "networkmanager",
+                "sudo",
+            ],
+        ]
+        .concat()
+        .as_slice(),
+    );
 }
