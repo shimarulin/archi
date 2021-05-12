@@ -3,7 +3,7 @@ use crate::utils::cmd;
 pub fn install() {
     println!("Install packages");
     cmd::exec(
-        "arch-chroot",
+        "pacstrap",
         vec![
             vec!["/mnt"],
             vec![
