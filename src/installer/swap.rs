@@ -17,3 +17,12 @@ pub fn on(disk_partition_path: &str) {
 
     println!("swap on {} enabled", disk_partition_path);
 }
+
+pub fn off() {
+    cmd::exec(
+        "swapoff",
+        &["--all"],
+    );
+
+    println!("All swap disabled");
+}
