@@ -14,6 +14,7 @@ fn main() {
 
     installer::install(&config);
 
+    println!("timezone is {}", config.answers.timezone);
     println!("firmware is {}", config.facts.firmware);
     println!("disk_path is {}", config.answers.disk.path);
     println!("username is {}", config.answers.user.username);

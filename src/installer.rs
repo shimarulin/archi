@@ -5,7 +5,7 @@ mod swap;
 mod packages;
 mod fstab;
 mod grub;
-// mod time;
+mod time;
 mod user;
 mod network;
 
@@ -26,5 +26,6 @@ pub fn install(config: &Config) {
 
     user::setup(&*config.answers.user.username, &*config.answers.user.password);
 
+    time::setup(&*config.answers.timezone);
     network::setup(&*config.answers.hostname);
 }
