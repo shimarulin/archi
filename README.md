@@ -1,13 +1,12 @@
 # Archi
 
-> Just another Arch installer
+> Just another simple and minimal Arch Linux installer
 
 ## Principles
 
 - Use the original Arch Linux installation image
 - Use minimal but sufficient setup
 - Use the most automated installation and configuration process
-- Ensure disk portability between different hardware as much as possible
 
 ## Features
 
