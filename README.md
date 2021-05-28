@@ -2,13 +2,13 @@
 
 > Just another simple and minimal Arch Linux installer
 
-## Principles
+### Principles
 
 - Use the original Arch Linux installation image
 - Use minimal but sufficient setup
 - Use the most automated installation and configuration process
 
-## Features
+### Features
 
 - UEFI and BIOS compatible disk layout and bootloader (used GRUB2)
 - Btrfs subvolumes for root and home directories
@@ -16,7 +16,7 @@
 - Login for `root` user is disabled by default
 - Used NetworkManager for manage connections
 
-## Installation notes
+### Installation notes
 
 If you move the disc after installation to another computer with UEFI, do not forget to generate a new UEFI menu item (`/dev/sda` - your disk with installed Arch Linux):
 
@@ -25,6 +25,14 @@ efibootmgr -c -d /dev/sda -p 2 -L "Arch Linux" -l "\EFI\BOOT\BOOTX64.EFI"
 ```
 
 ## Development
+
+### Git hooks
+
+Run in project root to set Git hooks directory:
+
+```shell
+git config core.hooksPath .hooks
+```
 
 ### Development dependencies
 

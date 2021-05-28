@@ -1,0 +1,10 @@
+#!/bin/sh
+
+command -v rustfmt >/dev/null 2>&1 || { echo >&2 "The 'rustfmt' command is not installed. Aborting."; exit 1; }
+
+for FILE in $(git diff --name-only --staged); do
+    if [ "${FILE##*.}" = "rs" ]; then
+        rustfmt $FILE 2>/dev/null
+        git add $FILE
+    fi
+done
