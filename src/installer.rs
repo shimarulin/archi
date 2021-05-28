@@ -1,13 +1,13 @@
 use crate::setup::Config;
 
 mod disk;
-mod swap;
-mod packages;
 mod fstab;
 mod grub;
+mod network;
+mod packages;
+mod swap;
 mod time;
 mod user;
-mod network;
 
 pub fn install(config: &Config) {
     swap::off();
@@ -24,7 +24,10 @@ pub fn install(config: &Config) {
     fstab::generate();
     grub::install(&*config.answers.disk.path, &*config.facts.firmware);
 
-    user::setup(&*config.answers.user.username, &*config.answers.user.password);
+    user::setup(
+        &*config.answers.user.username,
+        &*config.answers.user.password,
+    );
 
     time::setup(&*config.answers.timezone);
     network::setup(&*config.answers.hostname);

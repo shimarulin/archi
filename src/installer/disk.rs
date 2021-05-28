@@ -84,7 +84,12 @@ fn mount_home_subvolume(disk_partition_path: &str) {
     cmd::exec("mkdir", &["-p", "/mnt/home"]);
     cmd::exec(
         "mount",
-        &["-o", "subvol=@home,compress=zstd", disk_partition_path, "/mnt/home"],
+        &[
+            "-o",
+            "subvol=@home,compress=zstd",
+            disk_partition_path,
+            "/mnt/home",
+        ],
     );
 
     println!(

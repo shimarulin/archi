@@ -1,4 +1,4 @@
-use std::process::{Command, Stdio, Output};
+use std::process::{Command, Output, Stdio};
 
 pub fn exec(command: &str, args: &[&str]) -> Output {
     Command::new(command)

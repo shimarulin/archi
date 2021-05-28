@@ -3,7 +3,13 @@ use crate::utils::cmd;
 pub fn set_timezone(timezone: &str) {
     cmd::exec(
         "arch-chroot",
-        &["/mnt", "ln", "-sf", &*format!("/usr/share/zoneinfo/{}", timezone), "/etc/localtime"],
+        &[
+            "/mnt",
+            "ln",
+            "-sf",
+            &*format!("/usr/share/zoneinfo/{}", timezone),
+            "/etc/localtime",
+        ],
     );
 }
 

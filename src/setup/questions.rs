@@ -1,10 +1,10 @@
-use crate::setup::facts::{Facts, disks};
+use crate::setup::facts::{disks, Facts};
 
-mod disk;
-mod user;
 mod confirm;
+mod disk;
 mod hostname;
 mod timezone;
+mod user;
 
 pub struct Answers {
     pub disk: disks::BlockDevice,

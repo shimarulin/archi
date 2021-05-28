@@ -1,14 +1,18 @@
 use dialoguer::console::style;
 
-mod setup;
 mod installer;
+mod setup;
 mod utils;
 
 fn main() {
     let config = setup::setup();
 
     if config.answers.confirm == false {
-        println!("{}", style("\n  ╔══════════════════╗\n  ║ Canceled by user ║\n  ╚══════════════════╝").cyan());
+        println!(
+            "{}",
+            style("\n  ╔══════════════════╗\n  ║ Canceled by user ║\n  ╚══════════════════╝")
+                .cyan()
+        );
         std::process::exit(0)
     }
 

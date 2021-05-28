@@ -1,7 +1,7 @@
+use std::fs;
 use std::fs::{File, OpenOptions};
 use std::io::{BufReader, Read, Write};
 use std::path::Path;
-use std::fs;
 
 pub fn create(path: &str, content: &str) {
     let path_ = Path::new(path);

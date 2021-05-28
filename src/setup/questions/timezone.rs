@@ -1,5 +1,5 @@
 use crate::setup::questions_theme::get_questions_theme;
-use dialoguer::{Select};
+use dialoguer::Select;
 use std::process::Command;
 
 pub fn select(timezone_default: &str) -> String {
@@ -10,9 +10,7 @@ pub fn select(timezone_default: &str) -> String {
 
     let raw_timezone_list = String::from_utf8(output.stdout).unwrap();
 
-    let selections = &raw_timezone_list
-        .split("\n")
-        .collect::<Vec<_>>();
+    let selections = &raw_timezone_list.split("\n").collect::<Vec<_>>();
 
     let index_default = selections.iter().position(|&x| x == timezone_default);
 

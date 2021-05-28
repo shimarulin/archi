@@ -1,7 +1,7 @@
 use crate::setup::facts::disks;
 use crate::setup::questions_theme::get_questions_theme;
 use dialoguer::console::style;
-use dialoguer::{Confirm};
+use dialoguer::Confirm;
 
 pub fn ask_confirm(block_device: &disks::BlockDevice) -> bool {
     let disk_info = format!(
