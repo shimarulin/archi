@@ -3,7 +3,8 @@ pre_bump_hooks = [
     "cargo bump {{version}}",
 ]
 post_bump_hooks = [
-    "cargo build --release --verbose && strip target/release/archi",
+    "cargo build --release --verbose",
+    "strip target/release/archi",
 ]
 authors = []
 
