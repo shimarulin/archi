@@ -49,9 +49,7 @@ or `openssl-devel` on Fedora.
 Install development tools:
 
 ```shell
-cargo install cargo-edit
-cargo install cocogitto
-cargo install cargo-bump
+cargo install cargo-edit cocogitto cargo-bump
 ```
 
 ### Build
