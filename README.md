@@ -46,6 +46,14 @@ sudo apt install libssl-dev && cargo install cargo-edit
 
 or `openssl-devel` on Fedora.
 
+Install development tools:
+
+```shell
+cargo install cargo-edit
+cargo install cocogitto
+cargo install cargo-bump
+```
+
 ### Build
 
 #### Optimizing the size of the executable file
