@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.0.2 - 2021-05-29
+
+
+### Bug Fixes
+
+b70f17 - 'git push' on hook - Vyacheslav Shimarulin
+
+
+- - -
 ## 1.0.1 - 2021-05-29
 
 
