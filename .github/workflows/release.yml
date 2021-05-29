@@ -22,11 +22,8 @@ jobs:
     # https://stackoverflow.com/questions/57921401/push-to-origin-from-github-action/58393457#58393457
     - name: Setup Git
       run: |
-        git config --global user.name 'github-actions[bot]'
-        git config --global user.email 'shimarulin@users.noreply.github.com'
-
-    - name: CWD
-      run: echo $PWD
+        git config --global user.name 'github-actions'
+        git config --global user.email 'github-actions@github.com'
 
     - name: Install dependencies
       run: cargo install cocogitto cargo-bump
