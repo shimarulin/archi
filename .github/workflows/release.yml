@@ -16,5 +16,19 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build
-      run: cargo build --release --verbose && strip target/release/archi
+    # https://stackoverflow.com/questions/57921401/push-to-origin-from-github-action/58393457#58393457
+    - name: Setup Git
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'shimarulin@users.noreply.github.com'
+
+    - name: Create release
+      run: cog bump --auto
+
+    - name: Deploy release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: target/release/archi
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
