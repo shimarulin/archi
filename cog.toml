@@ -1,6 +1,10 @@
 changelog_path = "CHANGELOG.md"
-pre_bump_hooks = []
-post_bump_hooks = []
+pre_bump_hooks = [
+    "cargo bump {{version}}",
+]
+post_bump_hooks = [
+    "cargo build --release --verbose && strip target/release/archi",
+]
 authors = []
 
 [commit_types]
