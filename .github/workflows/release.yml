@@ -26,10 +26,10 @@ jobs:
       run: echo $PWD
 
     - name: Install dependencies
-      run: cog check
+      run: cargo install cocogitto cargo-bump
 
     - name: Check commits
-      run: cog bump --auto
+      run: cog check
 
     - name: Create release
       run: cog bump --auto
