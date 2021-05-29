@@ -1,6 +1,7 @@
 changelog_path = "CHANGELOG.md"
 pre_bump_hooks = [
     "cargo bump {{version}}",
+    "git add ./Cargo.lock",
 ]
 post_bump_hooks = [
     "cargo build --release --verbose",
