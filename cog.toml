@@ -3,7 +3,6 @@ pre_bump_hooks = [
     "cargo bump {{version}}",
     "cargo build --release --verbose",
     "strip target/release/archi",
-    "git checkout main",
     "git add ./Cargo.lock",
 ]
 post_bump_hooks = [
