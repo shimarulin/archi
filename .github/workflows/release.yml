@@ -3,8 +3,7 @@ name: Release
 on:
   push:
     branches: [ master ]
-    tags-ignore:
-      - *
+    tags-ignore: [ * ]
 
 env:
   CARGO_TERM_COLOR: always
