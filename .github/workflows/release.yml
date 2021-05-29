@@ -35,6 +35,9 @@ jobs:
     - name: Create release
       run: cog bump --auto
 
+    - name: Push release
+      run: git push --tags
+
     - name: Deploy release
       uses: softprops/action-gh-release@v1
       with:
