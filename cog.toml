@@ -5,7 +5,10 @@ pre_bump_hooks = [
     "strip target/release/archi",
     "git add ./Cargo.lock",
 ]
-post_bump_hooks = []
+post_bump_hooks = [
+    "git push",
+    "git push --tags"
+]
 authors = []
 
 [commit_types]
