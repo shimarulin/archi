@@ -2,6 +2,40 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.0.1 - 2021-05-29
+
+
+### Bug Fixes
+
+b664ea - test create release - Vyacheslav Shimarulin
+
+
+### Continuous Integration
+
+34cc89 - update git user - Vyacheslav Shimarulin
+
+316a16 - fix git fetch depth - Vyacheslav Shimarulin
+
+431e5b - fix cog check - Vyacheslav Shimarulin
+
+05b37a - cog check - Vyacheslav Shimarulin
+
+3e555a - test CWD - Vyacheslav Shimarulin
+
+54f5fa - install workflow dependencies - Vyacheslav Shimarulin
+
+77463f - setup workflow - Vyacheslav Shimarulin
+
+2fc100 - change default branch name - Vyacheslav Shimarulin
+
+5ca7cc - fix string for ignore tags in workflow - Vyacheslav Shimarulin
+
+02d293 - fix ignore tags in workflow - Vyacheslav Shimarulin
+
+24948e - ignore tags in workflow - Vyacheslav Shimarulin
+
+
+- - -
 ## 1.0.0 - 2021-05-29
 
 
