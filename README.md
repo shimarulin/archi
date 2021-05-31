@@ -10,13 +10,28 @@
 
 ### Features
 
-- UEFI and BIOS compatible disk layout and bootloader (used GRUB2)
+- UEFI and BIOS compatible disk layout and bootloader (used GRUB2): you can use the disk with the installed system
+  in another computer with UEFI or BIOS without any changes in most use cases
+- Detect user timezone automatically
 - Btrfs subvolumes for root and home directories
 - Add new user with `sudo` for granting administrator privileges to a user
 - Login for `root` user is disabled by default
 - Used NetworkManager for manage connections
 
-### Installation notes
+### Installation and usage
+
+You should boot from Arch Linux installation image, download installer binary, set executable permission, and run it:
+
+```shell
+# Download https://github.com/shimarulin/archi/releases/latest/download/archi
+curl https://git.io/JGRV3 && chmod +x archi && archi
+```
+
+### Known issues
+
+At this moment timezone select (from [dialoguer](https://github.com/mitsuhiko/dialoguer)) isn't very convenient to use. Press arrow up and down on keyboard to select detected timezone.
+
+### Notes for installed system
 
 If you move the disc after installation to another computer with UEFI, do not forget to generate a new UEFI menu item (`/dev/sda` - your disk with installed Arch Linux):
 
