@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.0.11 - 2021-05-31
+
+
+### Bug Fixes
+
+a5c346 - commit message condition - Vyacheslav Shimarulin
+
+
+- - -
 ## 1.0.10 - 2021-05-31
 
 
