@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - main
-    tags-ignore:
-      - "*"
+    tags:
+      - "!*"
 
 env:
   CARGO_TERM_COLOR: always
@@ -21,6 +21,7 @@ jobs:
       with:
         token: ${{ secrets.PAT }}
         fetch-depth: 0
+
     # https://stackoverflow.com/questions/57921401/push-to-origin-from-github-action/58393457#58393457
     - name: Setup Git
       run: |
