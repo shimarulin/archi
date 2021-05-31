@@ -2,6 +2,17 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.0.8 - 2021-05-31
+
+
+### Bug Fixes
+
+a90eb8 - YAML syntax - Vyacheslav Shimarulin
+
+3f26cf - double release - Vyacheslav Shimarulin
+
+
+- - -
 ## 1.0.7 - 2021-05-31
 
 
