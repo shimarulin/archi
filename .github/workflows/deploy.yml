@@ -17,6 +17,7 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v2
       with:
+        token: ${{ secrets.PAT }}
         fetch-depth: 0
 
     - name: Build
@@ -28,4 +29,4 @@ jobs:
       with:
         files: target/release/archi
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PAT }}
