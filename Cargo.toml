@@ -1,6 +1,6 @@
 [package]
 name = "archi"
-version = "1.0.3"
+version = "1.0.4"
 authors = ["Vyacheslav Shimarulin <shimarulin@gmail.com>"]
 edition = "2018"
 
