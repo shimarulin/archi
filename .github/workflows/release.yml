@@ -2,7 +2,10 @@ name: Release
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - main
+    tags-ignore:
+      - "*.*.*"
 
 env:
   CARGO_TERM_COLOR: always
@@ -26,18 +29,5 @@ jobs:
     - name: Install dependencies
       run: cargo install cocogitto cargo-bump
 
-    - name: Check commits
-      run: cog check
-
-    - name: Current branch
-      run: git branch --show-current
-
     - name: Create release
       run: cog bump --auto
-
-    - name: Deploy release
-      uses: softprops/action-gh-release@v1
-      with:
-        files: target/release/archi
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
