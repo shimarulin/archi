@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.0.4 - 2021-05-31
+
+
+### Bug Fixes
+
+519831 - workflow naming, ignore tags - Vyacheslav Shimarulin
+
+
+- - -
 ## 1.0.3 - 2021-05-31
 
 
