@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.0.7 - 2021-05-31
+
+
+### Bug Fixes
+
+4a1c3c - add personal access token - Vyacheslav Shimarulin
+
+
+- - -
 ## 1.0.6 - 2021-05-31
 
 
