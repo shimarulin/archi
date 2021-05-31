@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.0.9 - 2021-05-31
+
+
+### Bug Fixes
+
+e58c0d - negative pattern for tags - Vyacheslav Shimarulin
+
+
+- - -
 ## 1.0.8 - 2021-05-31
 
 
