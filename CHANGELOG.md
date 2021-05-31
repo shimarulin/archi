@@ -2,6 +2,20 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.0.10 - 2021-05-31
+
+
+### Bug Fixes
+
+8840e4 - remove condition - Vyacheslav Shimarulin
+
+
+### Tests
+
+f3a21b - event.ref - Vyacheslav Shimarulin
+
+
+- - -
 ## 1.0.9 - 2021-05-31
 
 
