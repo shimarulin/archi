@@ -11,9 +11,9 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build:
-
+  release:
     runs-on: ubuntu-latest
+    if: !startsWith(github.ref, 'refs/tags/')
 
     steps:
     - name: Checkout repo
