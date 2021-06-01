@@ -24,7 +24,14 @@ You should boot from Arch Linux installation image, download installer binary, s
 
 ```shell
 # Download https://github.com/shimarulin/archi/releases/latest/download/archi
-curl https://git.io/JGRV3 && chmod +x archi && archi
+# with Curl
+curl -L https://git.io/JGRV3 --output archi
+# or Wget
+wget https://git.io/JGRV3 -O archi
+# Mark the file as executable
+chmod +x archi
+# Run
+./archi
 ```
 
 ### Known issues
