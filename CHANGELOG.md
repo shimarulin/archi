@@ -2,6 +2,20 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.1.0 - 2021-06-01
+
+
+### Documentation
+
+2acf1e - get archi - Vyacheslav Shimarulin
+
+
+### Features
+
+dba475 - add post-install message and confirm reboot - Vyacheslav Shimarulin
+
+
+- - -
 ## 1.0.0 - 2021-05-31
 
 
