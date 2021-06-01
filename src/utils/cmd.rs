@@ -8,3 +8,11 @@ pub fn exec(command: &str, args: &[&str]) -> Output {
         .output()
         .expect("ERR")
 }
+
+pub fn run(command: &str) -> Output {
+    Command::new(command)
+        .stdout(Stdio::inherit())
+        .stderr(Stdio::inherit())
+        .output()
+        .expect("ERR")
+}
