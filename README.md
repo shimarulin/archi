@@ -99,12 +99,13 @@ cargo build --release && strip target/release/archi
 
 #### Setup SSH connection
 
-1. Setup VM Network. Select Bridged Adapter
-2. Run VM:
+1. Add default VirtualBox Network: VirtualBox > Settings > Network > Add (you will get vboxnet0)
+2. Setup VM Network: VM's Settings > Network > Adapter 2 > Host Only (vboxnet0)
+3. Run VM:
     2.1. Setup password: `passwd`
-    2.2. Run SSH service: `systemctl start sshd`
     2.2. Show IP: `ip addr show` (192.168.43.91, for example)
-3. Connect from host: `ssh -o 'IdentitiesOnly=yes' root@192.168.43.91`
+4. If the SSH service in the guest OS is not running, start it (`systemctl start sshd`)
+5. Connect from host: `ssh -o 'IdentitiesOnly=yes' root@192.168.43.91`
 
 #### Send file from host to guest via SSH
 
