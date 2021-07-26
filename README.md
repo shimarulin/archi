@@ -95,6 +95,10 @@ Shell command:
 cargo build --release && strip target/release/archi
 ```
 
+#### Use Docker to build with musl
+
+See more on https://github.com/clux/muslrust
+
 ### How to test on Virtualbox
 
 #### Setup SSH connection
