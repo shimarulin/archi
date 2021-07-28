@@ -1,7 +1,7 @@
 use crate::setup::facts::disks;
-use crate::setup::questions_theme::get_questions_theme;
-use dialoguer::console::style;
-use dialoguer::Confirm;
+use crate::utils::input::answer_boolean_handler;
+use console::style;
+use inquire::Confirm;
 
 pub fn ask_confirm(block_device: &disks::BlockDevice) -> bool {
     let disk_info = format!(
@@ -23,8 +23,9 @@ pub fn ask_confirm(block_device: &disks::BlockDevice) -> bool {
 
     println!("{}", warning_note);
 
-    Confirm::with_theme(&get_questions_theme())
-        .with_prompt("Do you confirm the installation?")
-        .interact()
-        .unwrap()
+    answer_boolean_handler(
+        Confirm::new("Do you confirm the installation?")
+            .with_default(false)
+            .prompt(),
+    )
 }

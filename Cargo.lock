@@ -6,6 +6,7 @@ version = 3
 name = "archi"
 version = "1.1.0"
 dependencies = [
+ "console",
  "dialoguer",
  "inquire",
  "serde",

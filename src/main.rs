@@ -1,22 +1,29 @@
-use dialoguer::console::style;
+use crate::utils::input::exit_by_user;
+use console::style;
 
+mod actions;
 mod installer;
 mod setup;
 mod utils;
-mod actions;
 
 fn main() {
     let config = setup::setup();
 
-    let top_line          = style("\n  ╔══════════════════════════════════════════════════════════╗").cyan();
-    let bottom_line       = style("\n  ╚══════════════════════════════════════════════════════════╝").cyan();
-    let empty_line        = style("\n  ║                                                          ║").cyan();
-    let cancel_line       = style("\n  ║               Installation canceled by user              ║").cyan();
-    let success_line      = style("\n  ║ Arch Linux installed successfully                        ║").cyan();
-    let disk_line         = style("\n  ║ Disk:                                                    ║").cyan();
-    let user_line         = style("\n  ║ User:                                                    ║").cyan();
-    let next_step_line0   = style("\n  ║ You Arch Linux installation still mounted to /mnt        ║").cyan();
-    let next_step_line1   = style("\n  ║ You can reboot now or continue setup                     ║").cyan();
+    let top_line = style("\n  ╔══════════════════════════════════════════════════════════╗").cyan();
+    let bottom_line =
+        style("\n  ╚══════════════════════════════════════════════════════════╝").cyan();
+    let empty_line =
+        style("\n  ║                                                          ║").cyan();
+    let success_line =
+        style("\n  ║ Arch Linux installed successfully                        ║").cyan();
+    let disk_line =
+        style("\n  ║ Disk:                                                    ║").cyan();
+    let user_line =
+        style("\n  ║ User:                                                    ║").cyan();
+    let next_step_line0 =
+        style("\n  ║ You Arch Linux installation still mounted to /mnt        ║").cyan();
+    let next_step_line1 =
+        style("\n  ║ You can reboot now or continue setup                     ║").cyan();
     let disk_path_line = format!(
         "{start} {key:<8}: {value:<46} {end}",
         start = style("\n  ║").cyan(),
@@ -68,8 +75,7 @@ fn main() {
     );
 
     if config.answers.confirm == false {
-        println!("{}{}{}", top_line, cancel_line, bottom_line);
-        std::process::exit(0)
+        exit_by_user();
     }
 
     installer::install(&config);

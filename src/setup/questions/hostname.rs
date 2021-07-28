@@ -1,9 +1,11 @@
-use crate::setup::questions_theme::get_questions_theme;
-use dialoguer::Input;
+use crate::utils::input::answer_string_handler;
+use crate::utils::message::format_message;
+use inquire::{required, Text};
 
 pub fn input_hostname() -> String {
-    Input::with_theme(&get_questions_theme())
-        .with_prompt("Enter hostname")
-        .interact_text()
-        .unwrap()
+    answer_string_handler(
+        Text::new(&*format_message("Hostname"))
+            .with_validator(required!("The hostname is required"))
+            .prompt(),
+    )
 }
