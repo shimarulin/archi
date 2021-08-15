@@ -97,6 +97,10 @@ cargo build --release && strip target/release/archi
 
 #### Use Docker to build with musl
 
+```shell
+docker run -v $PWD:/volume -w /volume -t clux/muslrust cargo build
+```
+
 See more on https://github.com/clux/muslrust
 
 ### How to test on Virtualbox

@@ -1,6 +1,6 @@
 use console::style;
 use inquire::error::InquireResult;
-use inquire::OptionAnswer;
+use inquire::option_answer::OptionAnswer;
 
 pub fn exit_by_user() {
     let top_line = style("\n  ╔══════════════════════════════════════════════════════════╗").cyan();
