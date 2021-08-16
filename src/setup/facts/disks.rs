@@ -9,7 +9,6 @@ pub struct BlockDevice {
     pub model: String,
     pub serial: String,
     pub size: String,
-    pub hotplug: bool,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -23,7 +22,7 @@ pub fn get_disk_info() -> Vec<BlockDevice> {
         // 8 - SATA and USB devices
         // 259 - NVME devices
         .args(&["--include", "8,259"])
-        .args(&["--output", "NAME,PATH,SIZE,MODEL,SERIAL,HOTPLUG"])
+        .args(&["--output", "NAME,PATH,SIZE,MODEL,SERIAL"])
         .output()
         .expect("failed to execute lsblk");
 

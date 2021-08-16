@@ -3,7 +3,7 @@ use crate::utils::message::format_message;
 use inquire::Select;
 use std::process::Command;
 
-pub fn select(timezone_default: &str) -> String {
+pub fn select_timezone(timezone_default: &str) -> String {
     let output = Command::new("timedatectl")
         .arg("list-timezones")
         .output()

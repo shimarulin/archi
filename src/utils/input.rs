@@ -33,6 +33,16 @@ pub fn answer_option_handler(answer: InquireResult<OptionAnswer>) -> String {
     }
 }
 
+pub fn answer_option_index_handler(answer: InquireResult<OptionAnswer>) -> usize {
+    match answer {
+        Ok(_) => answer.unwrap().index,
+        Err(_) => {
+            exit_by_user();
+            0
+        }
+    }
+}
+
 pub fn answer_boolean_handler(answer: InquireResult<bool>) -> bool {
     match answer {
         Ok(_) => answer.unwrap(),
