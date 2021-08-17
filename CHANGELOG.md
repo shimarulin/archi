@@ -2,6 +2,171 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.2.0 - 2021-08-17
+
+
+### Features
+
+11bcda - moved from dialoguer to inquire - Vyacheslav Shimarulin
+
+175955 - replace dialoguer to inquire and add handler to inquire response - Vyacheslav Shimarulin
+
+435bf5 - replace dialoguer::Select to inquire::Select - Vyacheslav Shimarulin
+
+0cfa5b - add post-install message and confirm reboot - Vyacheslav Shimarulin
+
+
+### Bug Fixes
+
+3b9596 - commit message condition - Vyacheslav Shimarulin
+
+481111 - remove condition - Vyacheslav Shimarulin
+
+c60596 - negative pattern for tags - Vyacheslav Shimarulin
+
+01e5ac - YAML syntax - Vyacheslav Shimarulin
+
+a754e6 - double release - Vyacheslav Shimarulin
+
+0e06f5 - add personal access token - Vyacheslav Shimarulin
+
+0e3fad - only tags on deploy - Vyacheslav Shimarulin
+
+9af5cb - get tags on deploy - Vyacheslav Shimarulin
+
+8aa9db - workflow naming, ignore tags - Vyacheslav Shimarulin
+
+129875 - split release and deploy workflow - Vyacheslav Shimarulin
+
+62ad78 - 'git push' on hook - Vyacheslav Shimarulin
+
+d1b342 - cog settings - Vyacheslav Shimarulin
+
+76a9af - git checkout main - Vyacheslav Shimarulin
+
+4b9ce9 - revert changes from bump version 1.0.1 - Vyacheslav Shimarulin
+
+762636 - push changes to git - Vyacheslav Shimarulin
+
+29a872 - test create release - Vyacheslav Shimarulin
+
+
+### Miscellaneous Chores
+
+def085 - add banner - Vyacheslav Shimarulin
+
+61a059 - inquire upgrade - Vyacheslav Shimarulin
+
+7ccb93 - add .DS_Store to Git ignore file - Vyacheslav Shimarulin
+
+745adb - 1.1.0 - github-actions
+
+6ecc44 - 1.0.0 - Vyacheslav Shimarulin
+
+e6d4b3 - pre-release changes - Vyacheslav Shimarulin
+
+07cca7 - add license file - Vyacheslav Shimarulin
+
+d96083 - add license info - Vyacheslav Shimarulin
+
+b220d1 - 1.0.11 - github-actions
+
+8f2d6d - 1.0.10 - github-actions
+
+c15025 - 1.0.9 - github-actions
+
+c27265 - 1.0.8 - github-actions
+
+06f64b - 1.0.7 - github-actions
+
+da4935 - 1.0.6 - github-actions
+
+fe0ea5 - 1.0.5 - github-actions
+
+4245d8 - 1.0.4 - github-actions
+
+d34057 - 1.0.3 - github-actions
+
+ca3e29 - 1.0.2 - github-actions
+
+c9b0f1 - 1.0.1 - Vyacheslav Shimarulin
+
+4a5e95 - test on master - Vyacheslav Shimarulin
+
+170efd - 1.0.1 - github-actions
+
+56f6d1 - 1.0.0 - Vyacheslav Shimarulin
+
+
+### Documentation
+
+5c691f - remove dialoguer note - Vyacheslav Shimarulin
+
+040d11 - use Docker to build with musl - Vyacheslav Shimarulin
+
+707b17 - Setup SSH connection for VM - Vyacheslav Shimarulin
+
+52e8f8 - get archi - Vyacheslav Shimarulin
+
+6deb45 - update features, add usage information and known issues - Vyacheslav Shimarulin
+
+
+### Tests
+
+d02cbd - event.ref - Vyacheslav Shimarulin
+
+
+### Refactoring
+
+f31b6b - remove unused config - Vyacheslav Shimarulin
+
+cfd10a - remove unused import - Vyacheslav Shimarulin
+
+6f8269 - rename GitHub action - Vyacheslav Shimarulin
+
+
+### Continuous Integration
+
+b0d0d6 - remove event.ref - Vyacheslav Shimarulin
+
+e9eb62 - move 'git push' to action step - Vyacheslav Shimarulin
+
+614e49 - update git user - Vyacheslav Shimarulin
+
+a5567e - fix git fetch depth - Vyacheslav Shimarulin
+
+adde9b - fix cog check - Vyacheslav Shimarulin
+
+3c3638 - cog check - Vyacheslav Shimarulin
+
+af14ed - test CWD - Vyacheslav Shimarulin
+
+2e28cc - install workflow dependencies - Vyacheslav Shimarulin
+
+5783c3 - setup workflow - Vyacheslav Shimarulin
+
+9a593b - change default branch name - Vyacheslav Shimarulin
+
+38cb53 - fix string for ignore tags in workflow - Vyacheslav Shimarulin
+
+a86842 - fix ignore tags in workflow - Vyacheslav Shimarulin
+
+9d4e20 - ignore tags in workflow - Vyacheslav Shimarulin
+
+53ef29 - move build to pre-bump hooks - Vyacheslav Shimarulin
+
+e85473 - add Cargo.lock to commit - Vyacheslav Shimarulin
+
+42cf38 - split post-bump command - Vyacheslav Shimarulin
+
+2fee91 - create release - Vyacheslav Shimarulin
+
+e9b4ba - add cocogitto - Vyacheslav Shimarulin
+
+3d5645 - add release action - Vyacheslav Shimarulin
+
+
+- - -
 ## 1.1.0 - 2021-06-01
 
 
