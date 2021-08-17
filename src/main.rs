@@ -1,5 +1,5 @@
 use crate::utils::input::exit_by_user;
-use console::style;
+use console::{style, Term};
 
 mod actions;
 mod installer;
@@ -7,6 +7,36 @@ mod setup;
 mod utils;
 
 fn main() {
+    let term_width = usize::from(Term::stdout().size().1) - 3;
+
+    let welcome_message_r0 = style("Welcome to").cyan().bright();
+    let logo_r0 = style("    _             _     _ ").cyan().bright();
+    let logo_r1 = style("   / \\   _ __ ___| |__ (_)").cyan().bright();
+    let logo_r2 = style("  / _ \\ | '__/ __| '_ \\| |").cyan().bright();
+    let logo_r3 = style(" / ___ \\| | | (__| | | | |").cyan().bright();
+    let logo_r4 = style("/_/   \\_\\_|  \\___|_| |_|_|").cyan().bright();
+    let logo = format!(
+        "{:^width$}\n{:^width$}\n{:^width$}\n{:^width$}\n{:^width$}",
+        logo_r0,
+        logo_r1,
+        logo_r2,
+        logo_r3,
+        logo_r4,
+        width = term_width
+    );
+
+    let welcome_message_r1 = style("Simple and minimal Arch Linux installer")
+        .cyan()
+        .bright();
+
+    println!(
+        "{:^width$}\n{}\n\n{:^width$}\n",
+        welcome_message_r0,
+        logo,
+        welcome_message_r1,
+        width = term_width
+    );
+
     let config = setup::setup();
 
     let top_line = style("\n  ╔══════════════════════════════════════════════════════════╗").cyan();
