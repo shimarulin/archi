@@ -1,15 +1,14 @@
-use crate::setup::questions_theme::get_questions_theme;
-use dialoguer::console::style;
-use dialoguer::Confirm;
 use crate::utils::cmd;
+use crate::utils::input::answer_boolean_handler;
+use crate::utils::message::format_message;
+use inquire::Confirm;
 
 pub fn confirm_reboot() {
-    if Confirm::with_theme(&get_questions_theme())
-        .with_prompt("Reboot now?")
-        .interact()
-        .unwrap()
-    {
-
+    if answer_boolean_handler(
+        Confirm::new(&*format_message("Reboot now?"))
+            .with_default(false)
+            .prompt(),
+    ) {
         cmd::run("reboot");
     } else {
         std::process::exit(0);

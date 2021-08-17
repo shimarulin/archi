@@ -1,5 +1,6 @@
-use crate::setup::questions_theme::get_questions_theme;
-use dialoguer::{Input, Password};
+use crate::utils::input::answer_string_handler;
+use crate::utils::message::format_message;
+use inquire::{required, Password, Text};
 
 pub struct User {
     pub username: String,
@@ -7,15 +8,20 @@ pub struct User {
 }
 
 pub fn setup_user() -> User {
+    let _username = answer_string_handler(
+        Text::new(&*format_message("Username"))
+            .with_validator(required!("The username is required"))
+            .prompt(),
+    );
+
+    let _password = answer_string_handler(
+        Password::new(&*format_message("Password"))
+            .with_validator(required!("The password is required"))
+            .prompt(),
+    );
+
     User {
-        username: Input::with_theme(&get_questions_theme())
-            .with_prompt("Enter your username")
-            .interact_text()
-            .unwrap(),
-        password: Password::with_theme(&get_questions_theme())
-            .with_prompt("Enter your password")
-            .with_confirmation("Repeat password", "Error: the passwords don't match.")
-            .interact()
-            .unwrap(),
+        username: _username,
+        password: _password,
     }
 }

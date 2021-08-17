@@ -1,6 +1,5 @@
 mod facts;
 mod questions;
-pub(crate) mod questions_theme;
 
 pub struct Config {
     pub facts: facts::Facts,
