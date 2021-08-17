@@ -31,4 +31,6 @@ pub fn install(config: &Config) {
 
     time::setup(&*config.answers.timezone);
     network::setup(&*config.answers.hostname);
+
+    packages::setup();
 }
