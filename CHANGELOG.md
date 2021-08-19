@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.4.1 - 2021-08-19
+
+
+### Bug Fixes
+
+c74c27 - fix spaces in /etc/profile - Vyacheslav Shimarulin
+
+
+- - -
 ## 1.4.0 - 2021-08-19
 
 
