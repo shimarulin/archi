@@ -2,6 +2,17 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.4.0 - 2021-08-19
+
+
+### Features
+
+d53f71 - update EDITOR, VISUAL and PATH environment variables - Vyacheslav Shimarulin
+
+3ac0d5 - set default text editor (nvim) - Vyacheslav Shimarulin
+
+
+- - -
 ## 1.3.0 - 2021-08-17
 
 
