@@ -14,9 +14,11 @@ pub fn install() {
                 "dosfstools",
                 "linux",
                 "linux-firmware",
-                "nano",
                 "networkmanager",
                 "sudo",
+                "neovim",
+                // curl package will be installed as 'networkmanager' dependency, just mention
+                "curl",
             ],
         ]
         .concat()
