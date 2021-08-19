@@ -3,6 +3,10 @@ use crate::utils::file;
 use std::io::Write;
 use std::process::{Command, Stdio};
 
+pub fn fill_skel() {
+    cmd::exec("mkdir", &["-p", "/mnt/etc/skel/.local/bin"]);
+}
+
 pub fn set_user_password(username: &str, password: &str) {
     let passwd_input = format!("{p}\n{p}", p = password);
 
@@ -63,6 +67,7 @@ pub fn enable_wheel_group() {
 }
 
 pub fn setup(username: &str, password: &str) {
+    fill_skel();
     create_user(&username);
     set_user_password(&username, &password);
     enable_wheel_group();

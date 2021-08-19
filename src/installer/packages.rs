@@ -1,4 +1,4 @@
-use crate::utils::{cmd, file};
+use crate::utils::cmd;
 
 pub fn install() {
     println!("Install packages");
@@ -17,33 +17,11 @@ pub fn install() {
                 "networkmanager",
                 "sudo",
                 "neovim",
-                // curl package will be installed as 'networkmanager' or 'git' dependency, just mention
+                // curl package will be installed as 'networkmanager' dependency, just mention
                 "curl",
-                "wget",
-                // OpenSSH client and server
-                "openssh",
-                "git",
-                "python",
-                "python-pip",
-                "ansible",
             ],
         ]
         .concat()
         .as_slice(),
     );
-}
-
-fn set_default_editor() {
-    let content = format!(
-        "
-EDITOR=/usr/bin/nvim
-VISUAL=/usr/bin/nvim
-"
-    );
-
-    file::append("/mnt/etc/environment", &*content);
-}
-
-pub fn setup() {
-    set_default_editor();
 }

@@ -1,6 +1,7 @@
 use crate::setup::Config;
 
 mod disk;
+mod env;
 mod fstab;
 mod grub;
 mod network;
@@ -32,5 +33,5 @@ pub fn install(config: &Config) {
     time::setup(&*config.answers.timezone);
     network::setup(&*config.answers.hostname);
 
-    packages::setup();
+    env::setup();
 }
