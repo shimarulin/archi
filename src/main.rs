@@ -10,6 +10,7 @@ fn main() {
     let term_width = usize::from(Term::stdout().size().1) - 3;
 
     let welcome_message_r0 = style("Welcome to").cyan().bright();
+
     let logo_r0 = style("    _             _     _ ").cyan().bright();
     let logo_r1 = style("   / \\   _ __ ___| |__ (_)").cyan().bright();
     let logo_r2 = style("  / _ \\ | '__/ __| '_ \\| |").cyan().bright();
@@ -29,11 +30,17 @@ fn main() {
         .cyan()
         .bright();
 
+    let pre_question_message_r2 =
+        style("Press ESC at any time to quit before starting the installation process")
+            .cyan()
+            .bright();
+
     println!(
-        "{:^width$}\n{}\n\n{:^width$}\n",
+        "{:^width$}\n{}\n\n{:^width$}\n\n{}\n",
         welcome_message_r0,
         logo,
         welcome_message_r1,
+        pre_question_message_r2,
         width = term_width
     );
 
