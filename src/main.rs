@@ -36,7 +36,7 @@ fn main() {
             .bright();
 
     println!(
-        "{:^width$}\n{}\n\n{:^width$}\n\n{}\n",
+        "{:^width$}\n{}\n\n{:^width$}\n\n\n{}",
         welcome_message_r0,
         logo,
         welcome_message_r1,
