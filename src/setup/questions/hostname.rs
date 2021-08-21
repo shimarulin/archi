@@ -1,7 +1,10 @@
 use crate::utils::input::answer_string_handler;
 use crate::utils::message::format_message;
-use inquire::validator::StringValidator;
-use inquire::{max_length, min_length, required, Text};
+use inquire::{
+    max_length, min_length, required,
+    validator::{InquireLength, StringValidator},
+    Text,
+};
 
 pub fn input_hostname() -> String {
     fn is_valid_hostname_characters(hostname: &str) -> bool {
