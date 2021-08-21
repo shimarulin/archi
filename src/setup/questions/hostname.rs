@@ -30,7 +30,7 @@ pub fn input_hostname() -> String {
         match is_valid_hostname_characters(input) {
         true => Ok(()),
         false => Err(String::from(
-            "Valid characters for hostnames are ASCII(7) letters from a to z, the digits from 0 to 9, and the hyphen (-)",
+            "The hostname can contain ASCII(7) letters from a to z, the digits from 0 to 9, and the hyphen (-)",
         )),
     }
     };
