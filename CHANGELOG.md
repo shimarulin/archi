@@ -2,6 +2,31 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.5.0 - 2021-08-22
+
+
+### Bug Fixes
+
+fce672 - stack of errors for long error message - Vyacheslav Shimarulin
+
+
+### Miscellaneous Chores
+
+19588f - welcome message style - Vyacheslav Shimarulin
+
+7078cc - inquire and serge upgrade - Vyacheslav Shimarulin
+
+
+### Features
+
+8c15b9 - ui controls render config - Vyacheslav Shimarulin
+
+7ce2ce - enable inquire option to reveal password by Ctrl+R - Vyacheslav Shimarulin
+
+40927c - add user help message - Vyacheslav Shimarulin
+
+
+- - -
 ## 1.4.1 - 2021-08-19
 
 
