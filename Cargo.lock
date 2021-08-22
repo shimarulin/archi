@@ -73,11 +73,12 @@ checksum = "a357d28ed41a50f9c765dbfe56cbc04a64e53e5fc58ba79fbc34c10ef3df831f"
 [[package]]
 name = "inquire"
 version = "0.0.8-alpha.0"
-source = "git+https://github.com/mikaelmello/inquire?rev=5a74c48#5a74c480e3d5153f461f61519c764bead8aca3c7"
+source = "git+https://github.com/mikaelmello/inquire?rev=9744e48#9744e48ccf59cf4109020e53c3c31857acbf31f4"
 dependencies = [
  "bitflags",
  "crossterm",
  "lazy_static",
+ "newline-converter",
  "thiserror",
  "unicode-segmentation",
 ]
@@ -148,6 +149,12 @@ checksum = "b9f1c5b025cda876f66ef43a113f91ebc9f4ccef34843000e0adf6ebbab84e21"
 dependencies = [
  "winapi",
 ]
+
+[[package]]
+name = "newline-converter"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d6f81c2b19eebbc4249b3ca6aff70ae05bf18d6a99b7cc63cf0248774e640565"
 
 [[package]]
 name = "ntapi"
