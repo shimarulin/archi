@@ -15,6 +15,6 @@ panic = 'abort'
 
 [dependencies]
 console = "0.14.1"
-inquire = { git = "https://github.com/mikaelmello/inquire", rev = "5a74c48" }
+inquire = { git = "https://github.com/mikaelmello/inquire", rev = "9744e48" }
 serde = { version = "1.0.127", features = ["derive"] }
 serde_json = "1.0.66"
