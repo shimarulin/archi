@@ -2,6 +2,20 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.5.1 - 2021-08-22
+
+
+### Bug Fixes
+
+913ddc - hide password and change summary message styles - Vyacheslav Shimarulin
+
+
+### Miscellaneous Chores
+
+3bed2b - inquire upgrade - Vyacheslav Shimarulin
+
+
+- - -
 ## 1.5.0 - 2021-08-22
 
 
