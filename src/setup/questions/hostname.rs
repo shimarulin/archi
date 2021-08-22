@@ -1,7 +1,10 @@
 use crate::utils::input::answer_string_handler;
 use crate::utils::message::format_message;
-use inquire::validator::StringValidator;
-use inquire::{max_length, min_length, required, Text};
+use inquire::{
+    max_length, min_length, required,
+    validator::{InquireLength, StringValidator},
+    Text,
+};
 
 pub fn input_hostname() -> String {
     fn is_valid_hostname_characters(hostname: &str) -> bool {
@@ -27,7 +30,7 @@ pub fn input_hostname() -> String {
         match is_valid_hostname_characters(input) {
         true => Ok(()),
         false => Err(String::from(
-            "Valid characters for hostnames are ASCII(7) letters from a to z, the digits from 0 to 9, and the hyphen (-)",
+            "The hostname can contain ASCII(7) letters from a to z, the digits from 0 to 9, and the hyphen (-)",
         )),
     }
     };

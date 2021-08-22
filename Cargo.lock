@@ -72,12 +72,12 @@ checksum = "a357d28ed41a50f9c765dbfe56cbc04a64e53e5fc58ba79fbc34c10ef3df831f"
 
 [[package]]
 name = "inquire"
-version = "0.0.7-alpha.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1081a5e1ff036059c72bcf79e73284c3c9cb7537828c7442f8b3c4d825336072"
+version = "0.0.8-alpha.0"
+source = "git+https://github.com/mikaelmello/inquire?rev=5a74c48#5a74c480e3d5153f461f61519c764bead8aca3c7"
 dependencies = [
  "bitflags",
  "crossterm",
+ "lazy_static",
  "thiserror",
  "unicode-segmentation",
 ]
@@ -259,9 +259,9 @@ dependencies = [
 
 [[package]]
 name = "serde_json"
-version = "1.0.64"
+version = "1.0.66"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "799e97dc9fdae36a5c8b8f2cae9ce2ee9fdce2058c57a93e6099d919fd982f79"
+checksum = "336b10da19a12ad094b59d870ebde26a45402e5b470add4b5fd03c5048a32127"
 dependencies = [
  "itoa",
  "ryu",

@@ -16,6 +16,8 @@ pub fn setup_user() -> User {
 
     let _password = answer_string_handler(
         Password::new(&*format_message("Password"))
+            .with_display_toggle_enabled()
+            .with_help_message("Ctrl+R to reveal password")
             .with_validator(required!("The password is required"))
             .prompt(),
     );
