@@ -1,6 +1,7 @@
 use crate::setup::facts::disks;
 use crate::utils::input::answer_option_index_handler;
 use crate::utils::message::format_message;
+use crate::utils::render_config::get_render_config;
 use inquire::Select;
 
 pub fn select_disk(block_device_list: &Vec<disks::BlockDevice>) -> disks::BlockDevice {
@@ -22,8 +23,10 @@ pub fn select_disk(block_device_list: &Vec<disks::BlockDevice>) -> disks::BlockD
         .map(|s| -> &str { &*s })
         .collect::<Vec<_>>();
 
+    let render_config = get_render_config();
     let selection = answer_option_index_handler(
         Select::new(&*format_message("Disk"), &selections2)
+            .with_render_config(&render_config)
             .with_page_size(10)
             .prompt(),
     );
