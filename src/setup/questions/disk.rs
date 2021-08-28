@@ -5,7 +5,7 @@ use crate::utils::render_config::get_render_config;
 use inquire::Select;
 
 pub fn select_disk(block_device_list: &Vec<disks::BlockDevice>) -> disks::BlockDevice {
-    let selections = &block_device_list
+    let select_disk_items = &block_device_list
         .iter()
         .map(|block_device| {
             format!(
@@ -18,17 +18,12 @@ pub fn select_disk(block_device_list: &Vec<disks::BlockDevice>) -> disks::BlockD
         })
         .collect::<Vec<_>>();
 
-    let selections2 = &selections
-        .iter()
-        .map(|s| -> &str { &*s })
-        .collect::<Vec<_>>();
-
     let render_config = get_render_config();
     let selection = answer_option_index_handler(
-        Select::new(&*format_message("Disk"), &selections2)
+        Select::new(&*format_message("Disk"), select_disk_items.to_vec())
             .with_render_config(&render_config)
             .with_page_size(10)
-            .prompt(),
+            .raw_prompt(),
     );
 
     disks::BlockDevice {

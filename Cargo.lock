@@ -72,8 +72,9 @@ checksum = "a357d28ed41a50f9c765dbfe56cbc04a64e53e5fc58ba79fbc34c10ef3df831f"
 
 [[package]]
 name = "inquire"
-version = "0.0.8-alpha.0"
-source = "git+https://github.com/mikaelmello/inquire?rev=9744e48#9744e48ccf59cf4109020e53c3c31857acbf31f4"
+version = "0.0.8"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "20e890f66fc9ea91780c580085f7f43dff44f7f13764f5265c8f6449c4a48928"
 dependencies = [
  "bitflags",
  "crossterm",
