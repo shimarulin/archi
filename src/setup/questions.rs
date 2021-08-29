@@ -5,6 +5,7 @@ mod disk;
 mod hostname;
 mod timezone;
 mod user;
+mod swap_size;
 
 pub struct Answers {
     pub disk: disks::BlockDevice,
@@ -12,6 +13,7 @@ pub struct Answers {
     pub confirm: bool,
     pub hostname: String,
     pub timezone: String,
+    pub swap_size: i32,
 }
 
 pub fn ask_questions(facts_: &Facts) -> Answers {
@@ -20,6 +22,7 @@ pub fn ask_questions(facts_: &Facts) -> Answers {
     let hostname_ = hostname::input_hostname();
     let timezone_ = timezone::select_timezone(&facts_.timezone);
     let confirm_ = confirm::ask_confirm(&disk_);
+    let swap_size_ = swap_size::input_swap_size().parse::<i32>().unwrap();
 
     Answers {
         disk: disk_,
@@ -27,5 +30,6 @@ pub fn ask_questions(facts_: &Facts) -> Answers {
         confirm: confirm_,
         hostname: hostname_,
         timezone: timezone_,
+        swap_size: swap_size_,
     }
 }

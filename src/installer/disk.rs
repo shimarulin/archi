@@ -1,6 +1,8 @@
 use crate::utils::cmd;
 
-pub fn parted(disk_path: &str) {
+pub fn parted(disk_path: &str, swap_size: &i32) {
+    let system_partition = format!("\"Linux\" btrfs 258MiB -{}MiB", swap_size);
+    let swap_partition = format!("\"Linux swap\" linux-swap -{}MiB -1MiB", swap_size);
     cmd::exec(
         "parted",
         vec![
@@ -10,8 +12,8 @@ pub fn parted(disk_path: &str) {
             vec!["set", "1", "bios_grub", "on"],
             vec!["mkpart", "\"EFI system\" fat32 2MiB 258MiB"],
             vec!["set", "2", "boot", "on"],
-            vec!["mkpart", "\"Linux\" btrfs 258MiB -4001MiB"],
-            vec!["mkpart", "\"Linux swap\" linux-swap -4001MiB -1MiB"],
+            vec!["mkpart", &system_partition],
+            vec!["mkpart", &swap_partition],
         ]
         .concat()
         .as_slice(),
