@@ -12,7 +12,10 @@ pub fn select_timezone(timezone_default: &str) -> String {
 
     let list_timezones_output_string = String::from_utf8(output.stdout).unwrap();
 
-    let select_timezone_items = &list_timezones_output_string.split("\n").map(|s| -> String { s.to_string() }).collect::<Vec<_>>();
+    let select_timezone_items = &list_timezones_output_string
+        .split("\n")
+        .map(|s| -> String { s.to_string() })
+        .collect::<Vec<_>>();
 
     let index_default = select_timezone_items
         .iter()

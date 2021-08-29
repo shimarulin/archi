@@ -1,10 +1,6 @@
 use crate::utils::input::answer_string_handler;
 use crate::utils::message::format_message;
-use inquire::{
-    required,
-    validator::{StringValidator},
-    Text,
-};
+use inquire::{required, validator::StringValidator, Text};
 
 pub fn input_swap_size() -> String {
     fn is_valid_hostname_characters(hostname: &str) -> bool {
