@@ -1,6 +1,6 @@
 use console::style;
 use inquire::error::InquireResult;
-use inquire::option_answer::OptionAnswer;
+use inquire::list_option::ListOption;
 
 pub fn exit_by_user() {
     let top_line = style("\n  ╔══════════════════════════════════════════════════════════╗").cyan();
@@ -23,7 +23,7 @@ pub fn answer_string_handler(answer: InquireResult<String>) -> String {
     }
 }
 
-pub fn answer_option_handler(answer: InquireResult<OptionAnswer>) -> String {
+pub fn answer_option_handler(answer: InquireResult<ListOption<String>>) -> String {
     match answer {
         Ok(_) => String::from(answer.unwrap().value),
         Err(_) => {
@@ -33,7 +33,7 @@ pub fn answer_option_handler(answer: InquireResult<OptionAnswer>) -> String {
     }
 }
 
-pub fn answer_option_index_handler(answer: InquireResult<OptionAnswer>) -> usize {
+pub fn answer_option_index_handler(answer: InquireResult<ListOption<String>>) -> usize {
     match answer {
         Ok(_) => answer.unwrap().index,
         Err(_) => {

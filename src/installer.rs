@@ -12,7 +12,7 @@ mod user;
 
 pub fn install(config: &Config) {
     swap::off();
-    disk::parted(&*config.answers.disk.path);
+    disk::parted(&*config.answers.disk.path, &config.answers.swap_size);
 
     let device_swap_path = format!("{}{}", config.answers.disk.path, "4");
     swap::init(&device_swap_path);

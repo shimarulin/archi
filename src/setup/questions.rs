@@ -3,6 +3,7 @@ use crate::setup::facts::{disks, Facts};
 mod confirm;
 mod disk;
 mod hostname;
+mod swap_size;
 mod timezone;
 mod user;
 
@@ -12,6 +13,7 @@ pub struct Answers {
     pub confirm: bool,
     pub hostname: String,
     pub timezone: String,
+    pub swap_size: i32,
 }
 
 pub fn ask_questions(facts_: &Facts) -> Answers {
@@ -19,6 +21,7 @@ pub fn ask_questions(facts_: &Facts) -> Answers {
     let user_ = user::setup_user();
     let hostname_ = hostname::input_hostname();
     let timezone_ = timezone::select_timezone(&facts_.timezone);
+    let swap_size_ = swap_size::input_swap_size().parse::<i32>().unwrap();
     let confirm_ = confirm::ask_confirm(&disk_);
 
     Answers {
@@ -27,5 +30,6 @@ pub fn ask_questions(facts_: &Facts) -> Answers {
         confirm: confirm_,
         hostname: hostname_,
         timezone: timezone_,
+        swap_size: swap_size_,
     }
 }
