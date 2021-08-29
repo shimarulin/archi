@@ -2,6 +2,30 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.6.0 - 2021-08-29
+
+
+### Miscellaneous Chores
+
+b70b0f - upgrade inquire to 0.0.8 - Vyacheslav Shimarulin
+
+
+### Features
+
+2ce52f - add swap size input - Vyacheslav Shimarulin
+
+
+### Style
+
+ee2b39 - code style - Vyacheslav Shimarulin
+
+
+### Bug Fixes
+
+1ae9b4 - question order - Vyacheslav Shimarulin
+
+
+- - -
 ## 1.5.1 - 2021-08-22
 
 
