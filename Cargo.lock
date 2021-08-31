@@ -41,9 +41,9 @@ dependencies = [
 
 [[package]]
 name = "crossterm"
-version = "0.20.0"
+version = "0.21.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c0ebde6a9dd5e331cd6c6f48253254d117642c31653baa475e394657c59c1f7d"
+checksum = "486d44227f71a1ef39554c0dc47e44b9f4139927c75043312690c3f476d1d788"
 dependencies = [
  "bitflags",
  "crossterm_winapi",
@@ -72,9 +72,9 @@ checksum = "a357d28ed41a50f9c765dbfe56cbc04a64e53e5fc58ba79fbc34c10ef3df831f"
 
 [[package]]
 name = "inquire"
-version = "0.0.8"
+version = "0.0.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "20e890f66fc9ea91780c580085f7f43dff44f7f13764f5265c8f6449c4a48928"
+checksum = "19f54fe7b326ca67006e1c5701bccf6e59d74ed63ac3a730de6097e62efabba4"
 dependencies = [
  "bitflags",
  "crossterm",
@@ -82,6 +82,7 @@ dependencies = [
  "newline-converter",
  "thiserror",
  "unicode-segmentation",
+ "unicode-width",
 ]
 
 [[package]]
