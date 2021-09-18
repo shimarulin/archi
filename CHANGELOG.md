@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.6.2 - 2021-09-18
+
+
+### Bug Fixes
+
+056a05 - upgrade inquire to 0.2.0 - Vyacheslav Shimarulin
+
+
+- - -
 ## 1.6.1 - 2021-08-31
 
 
