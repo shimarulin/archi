@@ -25,7 +25,7 @@ pub fn select_timezone(timezone_default: &str) -> String {
     let render_config = get_render_config();
     answer_option_handler(
         Select::new(&*format_message("Timezone"), select_timezone_items.to_vec())
-            .with_render_config(&render_config)
+            .with_render_config(render_config)
             .with_page_size(11)
             .with_starting_cursor(index_default)
             .raw_prompt(),
