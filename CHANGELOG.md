@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.6.3 - 2021-09-25
+
+
+### Bug Fixes
+
+114b7b - update the list of installed packages - Vyacheslav Shimarulin
+
+
+- - -
 ## 1.6.2 - 2021-09-18
 
 
