@@ -7,6 +7,7 @@ pub fn install() {
         vec![
             vec!["/mnt"],
             vec![
+                // Required
                 "base",
                 "btrfs-progs",
                 "grub",
@@ -14,10 +15,13 @@ pub fn install() {
                 "dosfstools",
                 "linux",
                 "linux-firmware",
-                "networkmanager",
                 "sudo",
+                "python",
+                // Network management (TODO: select alternatives)
+                "networkmanager",
+                // Text editor (TODO: select alternatives)
                 "neovim",
-                // curl package will be installed as 'networkmanager' dependency, just mention
+                // curl package will be installed as 'networkmanager' dependency
                 "curl",
             ],
         ]
