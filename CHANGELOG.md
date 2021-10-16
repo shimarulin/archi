@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.6.4 - 2021-10-16
+
+
+### Bug Fixes
+
+e8323d - move EDITOR and VISUAL environment variables to profile.d files - Vyacheslav Shimarulin
+
+
+- - -
 ## 1.6.3 - 2021-09-25
 
 
