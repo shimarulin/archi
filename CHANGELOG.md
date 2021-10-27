@@ -2,6 +2,17 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.8.0 - 2021-10-27
+
+
+### Features
+
+c37a31 - add vmd module - Vyacheslav Shimarulin
+
+a0d22d - nvm support - Vyacheslav Shimarulin
+
+
+- - -
 ## 1.7.0 - 2021-10-27
 
 
