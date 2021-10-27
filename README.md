@@ -10,10 +10,10 @@
 
 ### Features
 
-- UEFI and BIOS compatible disk layout and bootloader (used GRUB2): you can use the disk with the installed system
+- UEFI and BIOS compatible GPT disk layout and bootloader (used GRUB2): you can use the disk with the installed system
   in another computer with UEFI or BIOS without any changes in most use cases
 - Detect user timezone automatically
-- Btrfs subvolumes for root and home directories
+- Btrfs subvolumes
 - Add new user with `sudo` for granting administrator privileges to a user
 - Login for `root` user is disabled by default
 - Used NetworkManager for manage connections
