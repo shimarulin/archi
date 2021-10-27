@@ -1,4 +1,5 @@
 use crate::utils::cmd;
+use crate::utils::disk;
 
 const SUBVOLUME_NAMES: [&str; 8] = [
     "@/",
@@ -75,17 +76,9 @@ fn create_subvolume(name: &str) {
     println!("btrfs subvolume {} created", subvolume_path);
 }
 
-fn get_partition_path(disk_path: &str, partition_number: &str) -> String {
-    if disk_path.contains("nvme") {
-        format!("{}p{}", disk_path, partition_number)
-    } else {
-        format!("{}{}", disk_path, partition_number)
-    }
-}
-
 pub fn format(disk_path: &str) {
-    let device_efi_path = get_partition_path(disk_path, "2");
-    let device_system_path = get_partition_path(disk_path, "3");
+    let device_efi_path = disk::get_partition_path(disk_path, "2");
+    let device_system_path = disk::get_partition_path(disk_path, "3");
 
     format_efi_partition(&device_efi_path);
     format_system_partition(&device_system_path);
@@ -125,8 +118,8 @@ fn mount_efi_partition(disk_partition_path: &str) {
 }
 
 pub fn mount(disk_path: &str) {
-    let device_efi_path = get_partition_path(disk_path, "2");
-    let device_system_path = get_partition_path(disk_path, "3");
+    let device_efi_path = disk::get_partition_path(disk_path, "2");
+    let device_system_path = disk::get_partition_path(disk_path, "3");
     for subvolume_name in &SUBVOLUME_NAMES {
         mount_subvolume(
             &device_system_path,
