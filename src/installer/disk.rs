@@ -1,5 +1,16 @@
 use crate::utils::cmd;
 
+const SUBVOLUME_NAMES: [&str; 8] = [
+    "@/",
+    "@/home",
+    "@/opt",
+    "@/root",
+    "@/srv",
+    "@/var/log",
+    "@/var/opt",
+    "@/.snapshots",
+];
+
 pub fn parted(disk_path: &str, swap_size: &i32) {
     let system_partition = format!("\"Linux\" btrfs 258MiB -{}MiB", swap_size);
     let swap_partition = format!("\"Linux swap\" linux-swap -{}MiB -1MiB", swap_size);
@@ -50,6 +61,14 @@ fn umount_system_partition() {
 }
 
 fn create_subvolume(name: &str) {
+    let mut path_vec: Vec<&str> = name.split("/").collect();
+
+    if path_vec.len() > 2 {
+        path_vec.pop();
+        let internal_path = &*format!("/mnt/{}", path_vec.join("/"));
+        cmd::exec("mkdir", &["-p", internal_path]);
+    }
+
     let subvolume_path: &str = &*format!("{}{}", "/mnt/", name);
     cmd::exec("btrfs", &["subvolume", "create", subvolume_path]);
 
@@ -59,44 +78,32 @@ fn create_subvolume(name: &str) {
 pub fn format(disk_path: &str) {
     let device_efi_path = format!("{}{}", disk_path, "2");
     let device_system_path = format!("{}{}", disk_path, "3");
-    let subvolume_names = ["@", "@home"];
 
     format_efi_partition(&device_efi_path);
     format_system_partition(&device_system_path);
     mount_system_partition(&device_system_path);
-    for subvolume_name in &subvolume_names {
+    for subvolume_name in &SUBVOLUME_NAMES {
         create_subvolume(subvolume_name);
     }
     umount_system_partition();
 }
 
-fn mount_root_subvolume(disk_partition_path: &str) {
-    cmd::exec(
-        "mount",
-        &["-o", "subvol=@,compress=zstd", disk_partition_path, "/mnt"],
-    );
-
-    println!(
-        "btrfs subvolume @ on disk {} mounted to /mnt",
-        disk_partition_path
-    );
-}
-
-fn mount_home_subvolume(disk_partition_path: &str) {
-    cmd::exec("mkdir", &["-p", "/mnt/home"]);
+fn mount_subvolume(disk_partition_path: &str, subvolume_name: &str, mount_path: &str) {
+    let internal_mount_path = &*format!("/mnt{}", mount_path);
+    cmd::exec("mkdir", &["-p", internal_mount_path]);
     cmd::exec(
         "mount",
         &[
             "-o",
-            "subvol=@home,compress=zstd",
+            format!("subvol={},compress=zstd", subvolume_name).as_str(),
             disk_partition_path,
-            "/mnt/home",
+            internal_mount_path,
         ],
     );
 
     println!(
-        "btrfs subvolume @home on disk {} mounted to /mnt/home",
-        disk_partition_path
+        "btrfs subvolume {} on disk {} mounted to /mnt/{}",
+        subvolume_name, disk_partition_path, mount_path
     );
 }
 
@@ -112,7 +119,14 @@ fn mount_efi_partition(disk_partition_path: &str) {
 pub fn mount(disk_path: &str) {
     let device_efi_path = format!("{}{}", disk_path, "2");
     let device_system_path = format!("{}{}", disk_path, "3");
-    mount_root_subvolume(&device_system_path);
-    mount_home_subvolume(&device_system_path);
+    // mount_root_subvolume(&device_system_path);
+    // mount_home_subvolume(&device_system_path);
+    for subvolume_name in &SUBVOLUME_NAMES {
+        mount_subvolume(
+            &device_system_path,
+            subvolume_name,
+            subvolume_name.clone().replace("@", "").as_str(),
+        );
+    }
     mount_efi_partition(&device_efi_path);
 }
