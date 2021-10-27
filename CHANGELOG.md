@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.7.0 - 2021-10-27
+
+
+### Features
+
+cc1938 - btrfs enhancement - Vyacheslav Shimarulin
+
+
+- - -
 ## 1.6.4 - 2021-10-16
 
 
