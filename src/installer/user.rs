@@ -61,8 +61,8 @@ pub fn lock_login_as_root() {
 pub fn enable_wheel_group() {
     file::replace_string(
         "/mnt/etc/sudoers",
-        "# %wheel ALL=(ALL) ALL",
-        "%wheel ALL=(ALL) ALL",
+        "# %wheel ALL=(ALL:ALL) ALL",
+        "%wheel ALL=(ALL:ALL) ALL",
     )
 }
 
