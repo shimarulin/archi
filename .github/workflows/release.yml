@@ -20,6 +20,9 @@ jobs:
         token: ${{ secrets.PAT }}
         fetch-depth: 0
 
+    - name: Install dependencies
+      run: cargo install cargo-bump
+
     - name: Semver release
       uses: cocogitto/cocogitto-action@v2
       id: release
