@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.8.1 - 2022-03-02
+#### Bug Fixes
+- install cargo-bump - (629b549) - Vyacheslav Shimarulin
+- move section in cocogitto config - (6aae00b) - Vyacheslav Shimarulin
+- cocogitto config updated - (22f35af) - Vyacheslav Shimarulin
+- use cocogitto/cocogitto-action@v2 - (a171ebd) - Vyacheslav Shimarulin
+- etc/sudoers wheel group - (27c3ee6) - Vyacheslav Shimarulin
+- - -
+
 ## 1.8.0 - 2021-10-27
 
 
