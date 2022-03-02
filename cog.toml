@@ -1,6 +1,3 @@
-[changelog]
-path = "CHANGELOG.md"
-
 pre_bump_hooks = [
     "cargo bump {{version}}",
     "cargo test --verbose",
@@ -13,3 +10,6 @@ post_bump_hooks = [
 ]
 
 [commit_types]
+
+[changelog]
+path = "CHANGELOG.md"
