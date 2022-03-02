@@ -1,13 +1,15 @@
-changelog_path = "CHANGELOG.md"
+[changelog]
+path = "CHANGELOG.md"
+
 pre_bump_hooks = [
     "cargo bump {{version}}",
     "cargo test --verbose",
     "git add ./Cargo.lock",
 ]
+
 post_bump_hooks = [
     "git push",
     "git push --tags"
 ]
-authors = []
 
 [commit_types]
