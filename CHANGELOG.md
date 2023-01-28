@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.8.2 - 2023-01-28
+#### Bug Fixes
+- update the list of installed packages - (bf46eed) - Vyacheslav Shimarulin
+- - -
+
 ## 1.8.1 - 2022-03-02
 #### Bug Fixes
 - install cargo-bump - (629b549) - Vyacheslav Shimarulin
