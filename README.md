@@ -72,6 +72,14 @@ cargo install cargo-edit cocogitto cargo-bump
 
 ### Build
 
+#### error[E0554]: `#![feature]` may not be used on the stable release channel
+
+From https://github.com/dtolnay/thiserror/issues/192#issuecomment-1246276720:
+
+```shell
+cargo clean
+```
+
 #### Optimizing the size of the executable file
 
 - https://lifthrasiir.github.io/rustlog/why-is-a-rust-executable-large.html
@@ -103,13 +111,15 @@ See more on https://github.com/clux/muslrust
 
 #### Setup SSH connection
 
-1. Add default VirtualBox Network: VirtualBox > Settings > Network > Add (you will get vboxnet0)
-2. Setup VM Network: VM's Settings > Network > Adapter 2 > Host Only (vboxnet0)
-3. Run VM:
-    2.1. Setup password: `passwd`
-    2.2. Show IP: `ip addr show` (192.168.43.91, for example)
-4. If the SSH service in the guest OS is not running, start it (`systemctl start sshd`)
-5. Connect from host: `ssh -o 'IdentitiesOnly=yes' root@192.168.43.91`
+1. Add default VirtualBox Network:
+    1. _File_ > _Tools_ > _Network Manager_ > _Host-only Networks_ > _Create_ (you will get `vboxnet0`)
+    2. Select `vboxnet0` _Properties_ > _DHCP Server_ > _Enable Server_
+2. Setup VM Network: VM's _Settings_ > _Network_ > _Adapter 2_ > select _Host-only Adapter_ (vboxnet0)
+3. Run VM and load guest OS:
+    1. Setup password: `passwd`
+    2. Start the SSH service in the guest OS is not running, start it (`systemctl start sshd`)
+    3. Show IP on host OS: `ip addr show`, get IP for vboxnet0 (192.168.43.91, for example)
+4. Connect from host: `ssh -o 'IdentitiesOnly=yes' root@192.168.43.91`
 
 #### Send file from host to guest via SSH
 
