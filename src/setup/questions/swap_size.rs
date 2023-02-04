@@ -1,27 +1,33 @@
 use crate::utils::input::answer_string_handler;
 use crate::utils::message::format_message;
-use inquire::{required, validator::StringValidator, Text};
+use crate::utils::render_config::get_render_config;
+use inquire::{required, validator::Validation, Text};
 
 pub fn input_swap_size() -> String {
-    fn is_valid_hostname_characters(hostname: &str) -> bool {
+    fn is_valid_number(input: &str) -> bool {
         fn is_valid_char(byte: u8) -> bool {
             byte >= b'0' && byte <= b'9'
         }
 
-        !(hostname.bytes().any(|byte| !is_valid_char(byte)))
+        !(input.bytes().any(|byte| !is_valid_char(byte)))
     }
 
-    let allowed_characters: StringValidator = &|input| match is_valid_hostname_characters(input) {
-        true => Ok(()),
-        false => Err(String::from("The swap size should be a number")),
+    let swap_size_validator = |input: &str| match is_valid_number(input) {
+        true => Ok(Validation::Valid),
+        false => Ok(Validation::Invalid(
+            "The swap size should be a number".into(),
+        )),
     };
+
+    let render_config = get_render_config();
 
     answer_string_handler(
         Text::new(&*format_message("Swap size"))
+            .with_render_config(render_config)
             .with_default("4096")
             .with_help_message("Enter swap partition size in MiB")
             .with_validator(required!("The swap size is required"))
-            .with_validator(allowed_characters)
+            .with_validator(swap_size_validator)
             .prompt(),
     )
 }
