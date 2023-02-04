@@ -23,6 +23,7 @@ pub fn install(config: &Config) {
     disk::format(&*config.answers.disk.path);
     disk::mount(&*config.answers.disk.path);
 
+    packages::upgrade_archlinux_keyring();
     packages::install();
     fstab::generate();
     grub::install(&*config.answers.disk.path, &*config.facts.firmware);

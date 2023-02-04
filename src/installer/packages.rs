@@ -1,5 +1,15 @@
 use crate::utils::cmd;
 
+pub fn upgrade_archlinux_keyring() {
+    println!("Upgrade archlinux-keyring");
+    cmd::exec(
+        "pacman",
+        vec![vec!["-Sy"], vec!["archlinux-keyring"], vec!["--noconfirm"]]
+            .concat()
+            .as_slice(),
+    );
+}
+
 pub fn install() {
     println!("Install packages");
     cmd::exec(

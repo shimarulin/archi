@@ -14,7 +14,7 @@ lto = true
 panic = 'abort'
 
 [dependencies]
-console = "0.14.1"
-inquire = "0.2.0"
+console = "0.15.5"
+inquire = "0.5.3"
 serde = { version = "1.0.127", features = ["derive"] }
 serde_json = "1.0.66"
