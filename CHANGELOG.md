@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.9.0 - 2023-02-04
+#### Bug Fixes
+- breaking cursor position - (a4c6440) - Vyacheslav Shimarulin
+#### Features
+- move GRUB to EFI disk partition - (0d12969) - Vyacheslav Shimarulin
+- - -
+
 ## 1.8.2 - 2023-01-28
 #### Bug Fixes
 - update the list of installed packages - (bf46eed) - Vyacheslav Shimarulin
