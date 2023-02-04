@@ -13,16 +13,24 @@ const SUBVOLUME_NAMES: [&str; 8] = [
 ];
 
 pub fn parted(disk_path: &str, swap_size: &i32) {
-    let system_partition = format!("\"Linux\" btrfs 258MiB -{}MiB", swap_size);
-    let swap_partition = format!("\"Linux swap\" linux-swap -{}MiB -1MiB", swap_size);
+    let bios_start = "1MiB";
+    let efi_start = "2MiB";
+    let system_start = "258MiB";
+    let swap_start = format!("-{}MiB", swap_size);
+
+    let bios_partition = format!("\"BIOS boot\" fat32 {} {}", bios_start, efi_start);
+    let efi_partition = format!("\"EFI system\" fat32 {} {}", efi_start, system_start);
+    let system_partition = format!("\"Linux\" btrfs {} {}", system_start, swap_start);
+    let swap_partition = format!("\"Linux swap\" linux-swap {} -1MiB", swap_start);
+
     cmd::exec(
         "parted",
         vec![
             vec!["--script", "--", disk_path],
             vec!["mklabel", "gpt"],
-            vec!["mkpart", "\"BIOS boot\" fat32 1MiB 2MiB"],
+            vec!["mkpart", &bios_partition],
             vec!["set", "1", "bios_grub", "on"],
-            vec!["mkpart", "\"EFI system\" fat32 2MiB 258MiB"],
+            vec!["mkpart", &efi_partition],
             vec!["set", "2", "boot", "on"],
             vec!["mkpart", &system_partition],
             vec!["mkpart", &swap_partition],
@@ -109,7 +117,7 @@ fn mount_subvolume(disk_partition_path: &str, subvolume_name: &str, mount_path: 
 }
 
 fn mount_efi_partition(disk_partition_path: &str) {
-    let boot_efi_path = "/mnt/boot/efi";
+    let boot_efi_path = "/mnt/esp";
 
     cmd::exec("mkdir", &["-p", boot_efi_path]);
     cmd::exec("mount", &[disk_partition_path, boot_efi_path]);

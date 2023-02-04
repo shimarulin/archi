@@ -8,7 +8,7 @@ fn grub_mbr_install(disk_path: &str) {
             "grub-install",
             "--target=i386-pc",
             "--recheck",
-            "--boot-directory=/boot",
+            "--boot-directory=/esp/GRUB",
             &disk_path,
         ],
     );
@@ -23,8 +23,8 @@ fn grub_efi_install(disk_path: &str) {
             "--target=x86_64-efi",
             "--recheck",
             "--removable",
-            "--boot-directory=/boot",
-            "--efi-directory=/boot/efi",
+            "--boot-directory=/esp/GRUB",
+            "--efi-directory=/esp",
             &disk_path,
         ],
     );
@@ -54,7 +54,7 @@ fn create_efi_option(disk_path: &str) {
 fn grub_mkconfig() {
     cmd::exec(
         "arch-chroot",
-        &["/mnt", "grub-mkconfig", "-o", "/boot/grub/grub.cfg"],
+        &["/mnt", "grub-mkconfig", "-o", "/esp/GRUB/grub/grub.cfg"],
     );
 }
 
