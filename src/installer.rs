@@ -24,7 +24,7 @@ pub fn install(config: &Config) {
     disk::mount(&*config.answers.disk.path);
 
     packages::upgrade_archlinux_keyring();
-    packages::install();
+    packages::install(&*config.answers.kernel, &*config.answers.editor);
     fstab::generate();
     grub::install(&*config.answers.disk.path, &*config.facts.firmware);
     mkinitcpio::process();
@@ -37,5 +37,5 @@ pub fn install(config: &Config) {
     time::setup(&*config.answers.timezone);
     network::setup(&*config.answers.hostname);
 
-    env::setup();
+    env::setup(&*config.answers.editor);
 }
