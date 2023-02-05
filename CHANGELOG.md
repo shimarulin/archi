@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.10.0 - 2023-02-05
+#### Bug Fixes
+- remove vmd module from mkinitcpio config (loaded with block hook if needed) - (e6c6cb1) - Vyacheslav Shimarulin
+#### Features
+- add the ability to select a kernel and a text editor. - (7f16f37) - Vyacheslav Shimarulin
+- - -
+
 ## 1.9.0 - 2023-02-04
 #### Bug Fixes
 - breaking cursor position - (a4c6440) - Vyacheslav Shimarulin
