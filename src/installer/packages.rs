@@ -23,13 +23,14 @@ pub fn install() {
                 "grub",
                 "efibootmgr",
                 "dosfstools",
+                // (TODO: select "linux" or "linux-lts")
                 "linux",
                 "linux-firmware",
                 "sudo",
                 "python",
                 // Network management (TODO: select alternatives)
                 "networkmanager",
-                // Text editor (TODO: select alternatives)
+                // Text editor (TODO: select alternatives - neovim, emacs, micro, nano)
                 "neovim",
                 // curl package will be installed as 'networkmanager' dependency
                 "curl",
