@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.11.0 - 2023-02-07
+#### Features
+- set default editor for visudo. - (41f2819) - Vyacheslav Shimarulin
+- - -
+
 ## 1.10.0 - 2023-02-05
 #### Bug Fixes
 - remove vmd module from mkinitcpio config (loaded with block hook if needed) - (e6c6cb1) - Vyacheslav Shimarulin
