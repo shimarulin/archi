@@ -12,6 +12,16 @@ pub fn get_editor_options() -> Vec<Vec<&'static str>> {
     ]
 }
 
+pub fn get_editor_path(editor: &str) -> &str {
+    let editor_options = get_editor_options();
+    editor_options
+        .iter()
+        .find(|opt| opt.first().unwrap() == &editor)
+        .unwrap()
+        .get(1)
+        .unwrap_or(&"/usr/bin/nvim")
+}
+
 pub fn select_editor() -> String {
     let select_editor_items = get_editor_options()
         .clone()
