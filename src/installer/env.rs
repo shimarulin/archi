@@ -1,14 +1,8 @@
-use crate::setup::questions::editor::get_editor_options;
+use crate::setup::questions::editor::get_editor_path;
 use crate::utils::file;
 
 fn set_default_editor(editor: &str) {
-    let editor_options = get_editor_options();
-    let editor_path: &&str = editor_options
-        .iter()
-        .find(|opt| opt.first().unwrap() == &editor)
-        .unwrap()
-        .get(1)
-        .unwrap();
+    let editor_path = get_editor_path(&editor);
     let content = format!(
         "#!/bin/sh
 

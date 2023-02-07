@@ -1,3 +1,4 @@
+use crate::setup::questions::editor::get_editor_path;
 use crate::utils::cmd;
 use crate::utils::file;
 use std::io::Write;
@@ -66,11 +67,19 @@ pub fn enable_wheel_group() {
     )
 }
 
-pub fn setup(username: &str, password: &str) {
+fn set_visudo_editor(editor: &str) {
+    let editor_path = get_editor_path(&editor);
+    let content = format!("Defaults editor = {}\n", editor_path);
+
+    file::create("/mnt/etc/sudoers.d/editor", &*content);
+}
+
+pub fn setup(username: &str, password: &str, editor: &str) {
     fill_skel();
     create_user(&username);
     set_user_password(&username, &password);
     enable_wheel_group();
+    set_visudo_editor(&editor);
     add_user_to_groups(&username, &["wheel"]);
     lock_login_as_root();
 }

@@ -32,6 +32,7 @@ pub fn install(config: &Config) {
     user::setup(
         &*config.answers.user.username,
         &*config.answers.user.password,
+        &*config.answers.editor,
     );
 
     time::setup(&*config.answers.timezone);
