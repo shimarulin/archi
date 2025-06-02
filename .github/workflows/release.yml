@@ -24,9 +24,10 @@ jobs:
       run: cargo install cargo-bump
 
     - name: Semver release
-      uses: cocogitto/cocogitto-action@v2
+      uses: cocogitto/cocogitto-action@v3
       id: release
       with:
         release: true
+        check: false
         git-user: 'github-actions'
-        git-user-email: 'github-actions@github.com'
+        git-user-email: 'shimarulin@users.noreply.github.com'
