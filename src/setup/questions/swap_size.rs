@@ -2,6 +2,7 @@ use crate::utils::input::answer_string_handler;
 use crate::utils::message::format_message;
 use crate::utils::render_config::get_render_config;
 use inquire::{required, validator::Validation, Text};
+use sysinfo::System;
 
 pub fn input_swap_size() -> String {
     fn is_valid_number(input: &str) -> bool {
@@ -21,10 +22,19 @@ pub fn input_swap_size() -> String {
 
     let render_config = get_render_config();
 
+    fn bytes_to_mb(bytes: u64) -> f64 {
+        bytes as f64 / (1024.0 * 1024.0)
+    }
+
+    let mut sys = System::new_all();
+    sys.refresh_memory();
+    let total_memory = sys.total_memory();
+    let total_memory_mb = bytes_to_mb(total_memory).ceil().to_string();
+
     answer_string_handler(
         Text::new(&*format_message("Swap size"))
             .with_render_config(render_config)
-            .with_default("4096")
+            .with_default(&total_memory_mb)
             .with_help_message("Enter swap partition size in MiB")
             .with_validator(required!("The swap size is required"))
             .with_validator(swap_size_validator)
