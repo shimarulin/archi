@@ -129,11 +129,8 @@ pub fn mount(disk_path: &str) {
     let device_efi_path = disk::get_partition_path(disk_path, "2");
     let device_system_path = disk::get_partition_path(disk_path, "3");
     for subvolume_name in &SUBVOLUME_NAMES {
-        mount_subvolume(
-            &device_system_path,
-            subvolume_name,
-            subvolume_name.clone().replace("@", "").as_str(),
-        );
+        let subvolume_path = subvolume_name.replace("@", "");
+        mount_subvolume(&device_system_path, subvolume_name, &subvolume_path);
     }
     mount_efi_partition(&device_efi_path);
 }
