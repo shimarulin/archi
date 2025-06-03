@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.12.4 - 2025-06-03
+#### Bug Fixes
+- release workflow - (26c2609) - Vyacheslav Shimarulin
+
+- - -
+
 ## 1.11.0 - 2023-02-07
 #### Features
 - set default editor for visudo. - (41f2819) - Vyacheslav Shimarulin
