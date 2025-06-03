@@ -6,7 +6,8 @@ fn set_default_editor(editor: &str) {
     let content = format!(
         "#!/bin/sh
 
-export EDITOR={}
+export EDITOR={0}
+export VISUAL={0}
 ",
         editor_path
     );
